@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="features.persistence.model" default-access="field">
+	<class name="User">
+		<id name="username">
+			<generator class="assigned"/>
+		</id>
+		<property name="userGroup"/>
+		<property name="firstName"/>
+		<property name="lastName"/>
+		<property name="processing"/>
+		<property name="perception"/>
+		<property name="input"/>
+		<property name="understanding"/>
+	</class>
+</hibernate-mapping>

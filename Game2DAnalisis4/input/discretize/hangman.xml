@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+	
+	<analizedProperties>timesPlayed,timePlayed,level,result,resultWon,resultLost</analizedProperties>
+	
+	<discretization>
+		<discretizer name="timesPlayed" clazz="DiscretizerGeneral" tags="{Few,Medium,Many}"/>
+		<discretizer name="timePlayed" clazz="DiscretizerGeneral" tags="{Low,Medium,High}"/>
+		<discretizer name="resultWon" clazz="DiscretizerGeneral" tags="{Few,Medium,Many}"/>
+		<discretizer name="resultLost" clazz="DiscretizerGeneral" tags="{Few,Medium,Many}"/>
+
+		<property name="timesPlayed">
+			<interval to="11" tag="Few"/>
+			<interval from="12" to="25" tag="Medium"/>
+			<interval from="26" tag="Many"/>
+		</property>
+		<property name="timePlayed">
+			<interval from="0" to="15000" tag="Low"/>
+			<interval from="15001" to="23000" tag="Medium"/>
+			<interval from="23001" tag="High"/>
+		</property>
+		<property name="result">
+			<interval to="7" tag="Lost"/>
+			<interval from="8" to="20" tag="Tie"/>
+			<interval from="21" tag="Won"/>
+		</property>
+		<property name="resultWon">
+			<interval to="9" tag="Few"/>
+			<interval from="10" to="25" tag="Medium"/>
+			<interval from="26" tag="Many"/>
+		</property>
+		<property name="resultLost">
+			<interval to="1" tag="Few"/>
+			<interval from="2" to="3" tag="Medium"/>
+			<interval from="4" tag="Many"/>
+		</property>		
+	</discretization>
+</gameProperties>

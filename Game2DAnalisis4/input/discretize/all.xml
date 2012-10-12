@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+
+	<!-- 
+		Propiedades a utilizar para el analisis (archivos arff)
+		
+		a. No pongo CORRECTANSWERS e INCORRECTANSWERS porque RESULTWON y RESULTLOST dan mas informacion
+		(ejemplo: cuando hay timeout CORRECTANSWERS=0-INCORRECTANSWERS=0 y RESULTWON=0-RESULTLOST=1   
+		
+	<analizedProperties>timesPlayed,timePlayed,result,level,resultWon,resultLost</analizedProperties>
+	--> 
+	<analizedProperties>result,timesPlayed,timePlayed,level</analizedProperties>
+
+	<discretization>
+		<!-- Matchea una propiedad con la clase encargada de discretizarla (discretizadores genericos) -->
+		<discretizer name="timesPlayed" clazz="DiscretizerGeneral" tags="{Few,Many}"/>
+		<discretizer name="timePlayed" clazz="DiscretizerGeneral" tags="{Low,High}"/>
+		<discretizer name="level" clazz="DiscretizerGeneral" tags="{Low,Medium,High}"/>
+		<discretizer name="result" clazz="DiscretizerGeneral" tags="{Lost,Tie,Won}"/>
+		<discretizer name="resultWon" clazz="DiscretizerGeneral" tags="{Few,Many}"/>
+		<discretizer name="resultLost" clazz="DiscretizerGeneral" tags="{Few,Many}"/>
+		<discretizer name="correctAnswers" clazz="DiscretizerGeneral" tags="{Few,Many}"/>
+		<discretizer name="incorrectAnswers" clazz="DiscretizerGeneral" tags="{Few,Many}"/>
+
+		<!-- 	
+		<discretizer name="timesPlayed" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="timePlayed" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="level" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="result" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="resultWon" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="resultLost" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="correctAnswers" clazz="DiscretizerNull" tags="numeric"/>
+		<discretizer name="incorrectAnswers" clazz="DiscretizerNull" tags="numeric"/>
+		 -->
+		
+		<!-- Definicion de discretizaciones genericas -->
+		<property name="timesPlayed">
+			<interval from="0" to="5" tag="Few"/>
+			<interval from="6" tag="Many"/>
+		</property>
+		<property name="timePlayed">
+			<interval from="0" to="32000" tag="Low"/>
+			<interval from="32001" tag="High"/>
+		</property>
+		<property name="level">
+			<interval from="0" to="4" tag="Low"/>
+			<interval from="5" to="7" tag="Medium"/>
+			<interval from="8" tag="High"/>
+		</property>
+		<property name="result">
+			<interval to="-1" tag="Lost"/>
+			<interval from="0" to="18" tag="Tie"/>
+			<interval from="19" tag="Won"/>
+		</property>
+
+		<!-- No se tienen en cuenta -->		
+		<property name="resultWon">
+			<interval to="-1" tag="Few"/>
+			<interval from="0" tag="Many"/>
+		</property>
+		<property name="resultLost">
+			<interval to="-1" tag="Few"/>
+			<interval from="0" tag="Many"/>
+		</property>
+		<property name="correctAnswers">
+			<interval to="0" tag="Few"/>
+			<interval from="1" tag="Many"/>
+		</property>
+		<property name="incorrectAnswers">
+			<interval to="0" tag="Few"/>
+			<interval from="1" tag="Many"/>
+		</property>
+	</discretization>
+</gameProperties>

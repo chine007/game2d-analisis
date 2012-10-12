@@ -1,0 +1,7 @@
+1. No puedo usar el file 5-bayes/class.xml para analizar la percepcion porque los jugadores de Ariel tienen seteado 
+el nivel de perception a -10.
+
+2. Si el jugador presiona el boton restart => se graba LEVEL_LOST (correct e incorrectAnswers pueden ser igual a cero)
+lo mismo cuando hay timeout.
+Todo esto pasa porque los datos se obtuvieron con la primera version de los juegos, en la nueva version se graba un
+flag de timeout.    

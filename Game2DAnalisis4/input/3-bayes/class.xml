@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+	<!-- 
+	<filtering>
+		<filter clazz="FilterMinTimesPlayed">
+			<param name="from" value="0"/>
+			<param name="to" value="2"/>
+		</filter>
+	</filtering>
+	 -->
+	<discretization>
+		<discretizer name="class" clazz="DiscretizerGeneral" tags="{High,Neutral,Low}"/>
+		<property name="class">
+			<interval from="-11" to="-5" tag="Low"/>
+			<interval from="-3" to="3" tag="Neutral"/>
+			<interval from="5" to="11" tag="High"/>
+		</property>		
+	</discretization>
+</gameProperties>

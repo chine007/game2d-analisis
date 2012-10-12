@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="features.persistence.model" default-access="field">
+	<class name="Game">
+		<id name="id">
+			<generator class="assigned"/>
+		</id>
+		<property name="levels"/>
+		<set name="categories" table="game_gamecategory">
+			<key column="id_game"/>
+			<many-to-many class="GameCategory" column="id_gamecategory"/>
+		</set>
+		<set name="profileGame" inverse="true">
+			<key column="id_game"/>
+			<one-to-many class="ProfileGame"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:game="http://www.games.exa.unicen.edu.ar/GameSchema" 
+	targetNamespace="http://www.games.exa.unicen.edu.ar/GameSchema"
+	elementFormDefault="qualified">
+	
+	<element name="gameProperties" type="game:xmlGameProperties"/>
+
+	<complexType name="xmlGameProperties">
+		<sequence>
+			<element name="analizedProperties" type="string" minOccurs="0"/>
+			<element name="filtering" type="game:xmlFiltering" minOccurs="0"/>
+			<element name="discretization" type="game:xmlDiscretization" minOccurs="0"/>
+		</sequence>
+	</complexType>	
+	
+	<!--=========================================== 
+					Filtering 
+	============================================-->
+	<complexType name="xmlFiltering">
+		<sequence>
+			<element name="filter" type="game:xmlFilter" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="xmlFilter">
+		<sequence>
+			<element name="param" type="game:xmlParam" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="clazz" type="string" use="required"/>
+	</complexType>
+	
+	<complexType name="xmlParam">
+		<attribute name="name" type="string"/>
+		<attribute name="value" type="anySimpleType" use="required"/>
+	</complexType>
+	
+	<!--=========================================== 
+					Discretization 
+	============================================-->
+	<complexType name="xmlDiscretization">
+		<sequence>
+			<element name="discretizer" type="game:xmlDiscretizer" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="property" type="game:xmlProperty" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="xmlDiscretizer">
+		<sequence>
+			<element name="param" type="game:xmlParam" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="name" type="string" use="required"/>
+		<attribute name="clazz" type="string" use="required"/>
+		<attribute name="tags" type="string" use="required"/>
+	</complexType>	
+		
+	<complexType name="xmlProperty">
+		<sequence>
+			<element name="interval" type="game:xmlInterval" maxOccurs="unbounded"/>
+		</sequence>	
+		<attribute name="name" type="string" use="required"/>
+	</complexType>
+	
+	<complexType name="xmlInterval">
+		<attribute name="from" type="float"/>
+		<attribute name="to" type="float"/>
+		<attribute name="tag" type="string" use="required"/>
+	</complexType>
+	
+</schema>

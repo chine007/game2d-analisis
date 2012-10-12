@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="features.persistence.model" default-access="field">
+	<class name="ProfileGame">
+		<id name="id">
+			<generator class="identity"/>
+		</id>
+		<property name="level"/>
+		<property name="time"/>
+		<property name="won"/>
+		<property name="correctAnswers"/>
+		<property name="incorrectAnswers"/>
+		<property name="movs"/>
+		<property name="movsIn" column="movs_in"/>
+		<property name="movsOut" column="movs_out"/>
+		<property name="help"/>
+		<property name="timeout"/>
+		<property name="trace"/>
+		<property name="timesPlayed"/>
+		<property name="log"/>
+		<many-to-one name="game" class="Game" column="id_game"/>
+		<many-to-one name="user" class="User" column="username"/>
+	</class>
+</hibernate-mapping>

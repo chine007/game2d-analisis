@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="features.persistence.model" default-access="field">
+	<class name="Feature">
+		<id name="id">
+			<generator class="identity"/>
+		</id>
+		<property name="code"/>
+		<property name="description"/>
+	</class>
+</hibernate-mapping>

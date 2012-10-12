@@ -1,0 +1,14 @@
+% 1. Title: Games
+% 
+% 2. Sources:
+%      (a) Creator: Juan Feldman
+% 
+%	@ATTRIBUTE Discretizado   	{X, Y, Z}
+%	@ATTRIBUTE Numerico   		numeric
+% 
+@RELATION profilerecord
+
+${attributes}
+
+@DATA
+${data}

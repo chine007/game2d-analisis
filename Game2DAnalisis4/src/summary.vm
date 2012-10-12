@@ -1,0 +1,86 @@
+#* 	====================================================
+		Retorna el valor de la clase dado el valor de 
+		discretizacion
+		HIGH -> INT
+		LOW -> SEN
+	==================================================== *#
+#macro( felderDimension $predictedClazz )
+	#if ( $felderClasses.containsKey($predictedClazz) ) 
+		$felderClasses.get($predictedClazz)
+	#else 
+		$predictedClazz
+	#end
+#end
+
+
+#* 	====================================================
+		Imprime el resumen para cada clase
+		Ej: 
+			INT 20 - SEN 13  
+	==================================================== *#
+#macro( predictions $userPrediction )
+	(
+	#foreach( $key in $felderClasses.keySet() )
+		#felderDimension($key)
+		$userPrediction.getValue($key)
+	#end
+	)
+#end
+
+<style type="text/css">
+</style>
+
+#set( $size = $prediction.allGames.size()*450 )
+<table border="1" width="$size">
+	<caption>Opciones del clasificador: $classifierOptions</caption>
+  	
+  	<!-- HEADER -->
+  	<tr>
+	    <th class="first-two">Usuario</th>
+	    <th class="first-two">Felder</th>
+		#foreach( $game in $prediction.allGames )
+		    <th class="game">$game</th>
+	    	<th class="reg">#reg.</th>
+		#end
+	</tr>
+	
+  	<!-- BODY -->
+	#foreach( $user in $prediction.allUsernames )
+	<tr>
+	    <td>$foreach.count - $user</td>
+	    
+	    #set( $realClass = $prediction.getUserRealClass($user) )
+		<td>#felderDimension($realClass)</td>
+		
+		#foreach( $game in $prediction.allGames )
+			#set( $userPrediction = $prediction.getUserPrediction($user, $game) )
+			#set( $finalClazz = $userPrediction.getFinalClassification() )
+			#set( $instances = $userPrediction.getInstances() )
+			#set( $instancesString = "" )
+			#foreach( $instance in $instances )
+				#set( $index = $instance.classIndex() + 1 )
+				#set( $clazz = $instance.stringValue($index) )
+				#set( $instancesString = "$instancesString #felderDimension($clazz)" )
+			#end
+			
+		    <td align="right">
+		    	#felderDimension($finalClazz) 
+		    	#predictions($userPrediction)<br/>
+		    	$instancesString
+		    </td>
+		    <td align="right">$userPrediction.recordsQuantity</td>
+		#end
+	</tr>
+	#end
+	
+	<!-- FOOTER -->
+	<tr>
+		<td></td>
+		<td></td>
+		#foreach( $game in $prediction.allGames )
+			#set( $accuracy = $accuracyAlgor.getAccuracy($prediction, $game) )
+			<td align="right">$nf.format($accuracy.get()) ($accuracy.getFraction())</td>
+			<td></td>
+		#end
+	</tr>
+</table>

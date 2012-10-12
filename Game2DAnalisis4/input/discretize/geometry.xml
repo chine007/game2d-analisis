@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+	<discretization>
+		<discretizer name="timesPlayed" clazz="DiscretizerGeneral" tags="{Few,Medium,Many}"/>
+		<discretizer name="timePlayed" clazz="DiscretizerGeneral" tags="{Low,Medium,High}"/>
+
+		<property name="timesPlayed">
+			<interval from="0" to="2" tag="Few"/>
+			<interval from="3" to="5" tag="Medium"/>
+			<interval from="6" tag="Many"/>
+		</property>
+		<property name="level">
+			<interval from="0" to="9" tag="Low"/>
+			<interval from="10" to="12" tag="Medium"/>
+			<interval from="13" tag="High"/>
+		</property>
+		<property name="timePlayed">
+			<interval from="0" to="3999" tag="Low"/>
+			<interval from="4000" to="6000" tag="Medium"/>
+			<interval from="6001" tag="High"/>
+		</property>
+	</discretization>
+</gameProperties>

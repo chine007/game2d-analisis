@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+
+	<!-- 
+		La propiedad LEVEL no tiene sentido 
+		<analizedProperties>timesPlayed,timePlayed,result,resultWon,resultLost</analizedProperties>
+	-->
+	<analizedProperties>timesPlayed,timePlayed,result</analizedProperties>
+
+	<discretization>
+		<discretizer name="timesPlayed" clazz="DiscretizerGeneral" tags="{Few,Many}"/>
+		<discretizer name="timePlayed" clazz="DiscretizerGeneral" tags="{Low,Medium,High}"/>
+		<discretizer name="result" clazz="DiscretizerGeneral" tags="{Lost,Medium,Won}"/>
+	
+		<property name="timesPlayed">
+			<interval to="3" tag="Few"/>
+			<interval from="4" tag="Many"/>
+		</property>	
+		<property name="timePlayed">
+			<interval from="0" to="55000" tag="Low"/>
+			<interval from="55001" to="75000" tag="Medium"/>
+			<interval from="75001" tag="High"/>
+		</property>
+		<property name="result">
+			<interval to="-1" tag="Lost"/>
+			<interval from="0" to="2" tag="Medium"/>
+			<interval from="3" tag="Won"/>
+		</property>
+	</discretization>
+</gameProperties>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+	<!-- Definicion de filtros genericos  
+	<filtering>
+		<filter clazz="FilterFelderDimension">
+			<param name="from" value="-3"/>
+			<param name="to" value="3"/>
+		</filter>
+	</filtering>
+	-->
+	<!-- Definicion de discretizacion de la clase -->
+	<discretization>
+		<discretizer name="class" clazz="DiscretizerGeneral" tags="{High,Low}"/>
+		<property name="class">
+			<interval from="-11" to="-1" tag="Low"/>
+			<interval from="1" to="11" tag="High"/>
+		</property>		
+	</discretization>
+</gameProperties>

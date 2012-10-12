@@ -1,0 +1,5 @@
+Versiones:
+	*) 2: aplica discretizaciones en Java
+	*) 3.1: idem 2
+	*) 3.2: aplica discretizaciones en red de bayes
+	*) 4: usa Weka con cross-validation para analizar los datos

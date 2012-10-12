@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameProperties xmlns="http://www.games.exa.unicen.edu.ar/GameSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.games.exa.unicen.edu.ar/GameSchema ../../GameSchema.xsd">
+	<discretization>
+		<discretizer name="class" clazz="DiscretizerGeneral" tags="{VeryHigh,High,Neutral,Low,VeryLow}"/>
+		<property name="class">
+			<interval from="-11" to="-9" tag="VeryLow"/>
+			<interval from="-7" to="-5" tag="Low"/>
+			<interval from="-3" to="-1" tag="Neutral"/>
+			<interval from="1" to="3" tag="Neutral"/>
+			<interval from="5" to="7" tag="High"/>
+			<interval from="9" to="11" tag="VeryHigh"/>
+		</property>		
+	</discretization>
+</gameProperties>

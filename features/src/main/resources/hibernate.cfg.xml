@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- properties -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/game2d</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<property name="show_sql">false</property>
+		<property name="format_sql">true</property>
+
+		<!-- mapping files -->
+		<mapping resource="features/model/persistence/Feature.hbm.xml" />
+		<mapping resource="features/model/persistence/Game.hbm.xml" />
+		<mapping resource="features/model/persistence/GameCategory.hbm.xml" />
+		<mapping resource="features/model/persistence/ProfileGame.hbm.xml" />
+		<mapping resource="features/model/persistence/User.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
