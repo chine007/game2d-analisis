@@ -1,1 +1,5 @@
 .metadata/
+*/logs
+*/output
+*/bin
+RemoteSystemsTempFiles/
