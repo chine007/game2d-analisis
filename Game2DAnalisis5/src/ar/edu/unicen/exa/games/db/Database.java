@@ -1,5 +1,6 @@
 package ar.edu.unicen.exa.games.db;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -45,7 +46,7 @@ public class Database {
 
 		try {
 			// Read query file
-			String sqlFile = getFileName("allGames.sql");
+			InputStream sqlFile = getFileName("allGames.sql");
 			String query = GenieUtilsFile.readFile(sqlFile);
 
 			// Create statement
@@ -77,7 +78,7 @@ public class Database {
 
 		try {
 			// Read query file
-			String sqlFile = getFileName("allUsersPlayed.sql");
+			InputStream sqlFile = getFileName("allUsersPlayed.sql");
 			String query = GenieUtilsFile.readFile(sqlFile);
 
 			// Create statement
@@ -111,7 +112,7 @@ public class Database {
 
 		try {
 			// Read query file
-			String sqlFile = getFileName("felderDimensionValue.sql");
+			InputStream sqlFile = getFileName("felderDimensionValue.sql");
 			String query = GenieUtilsFile.readFile(sqlFile);
 
 			// Replace parameters
@@ -148,7 +149,7 @@ public class Database {
 
 		try {
 			// Read query file for getting data
-			String sqlFile = getFileName("countPlayers.sql");
+			InputStream sqlFile = getFileName("countPlayers.sql");
 			String query = GenieUtilsFile.readFile(sqlFile);
 
 			// Replace parameters
@@ -183,7 +184,7 @@ public class Database {
 
 		try {
 			// Read query file for getting data
-			String sqlFile = getFileName("propValue.sql");
+			InputStream sqlFile = getFileName("propValue.sql");
 			String query = GenieUtilsFile.readFile(sqlFile);
 
 			// Replace parameters
@@ -216,8 +217,8 @@ public class Database {
 	 *            Nombre del file
 	 * @return Path completo del file
 	 */
-	private String getFileName(String sqlFile) {
-		return getClass().getResource(sqlFile).getFile();
+	private InputStream getFileName(String sqlFile) {
+		return getClass().getResourceAsStream(sqlFile);
 	}
 
 }

@@ -1,6 +1,7 @@
 package ar.edu.unicen.exa.games.writers;
 
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class WriterArff {
 	public final void writeRecords(String game, List<Data> datas,
 			XmlGameProperties props) throws Exception {
 		// Lee el template
-		String file = WriterArff.class.getResource("template.arff").getFile();
+		InputStream file = WriterArff.class.getResourceAsStream("template.arff");
 		String template = UtilsFile.readFile(file);
 
 		// Obtiene las propiedades a analizar (atributos del ARFF)

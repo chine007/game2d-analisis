@@ -1,5 +1,6 @@
 package ar.edu.unicen.exa.games.db;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -46,7 +47,7 @@ public class Database {
 
 		try {
 			// Read query file for getting data
-			String sqlFile = getFileName(UtilsConfig.get().getValue("sql.file.data"));
+			InputStream sqlFile = getFileName(UtilsConfig.get().getValue("sql.file.data"));
 			String query = UtilsFile.readFile(sqlFile);
 
 			// Replace parameters
@@ -94,7 +95,7 @@ public class Database {
 
 		try {
 			// Read query file
-			String sqlFile = getFileName(UtilsConfig.get().getValue("sql.file.allGames"));
+			InputStream sqlFile = getFileName(UtilsConfig.get().getValue("sql.file.allGames"));
 			String query = UtilsFile.readFile(sqlFile);
 
 			// Create statement
@@ -131,7 +132,7 @@ public class Database {
 
 		try {
 			// Read query file for getting data
-			String sqlFile = getFileName(UtilsConfig.get().getValue("sql.file.countPlayers"));
+			InputStream sqlFile = getFileName(UtilsConfig.get().getValue("sql.file.countPlayers"));
 			String query = UtilsFile.readFile(sqlFile);
 
 			// Replace parameters
@@ -161,8 +162,8 @@ public class Database {
 	 *            Nombre del file
 	 * @return Path completo del file
 	 */
-	private String getFileName(String sqlFile) {
-		return getClass().getResource(sqlFile).getFile();
+	private InputStream getFileName(String sqlFile) {
+		return getClass().getResourceAsStream(sqlFile);
 	}
 	
 	/**

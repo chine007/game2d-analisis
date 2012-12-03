@@ -1,7 +1,7 @@
 package ar.edu.unicen.exa.genie.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -44,9 +44,9 @@ public abstract class GenieUtilsFile {
 	 * @return Contenido de un file
 	 * @throws Exception
 	 */
-	public static String readFile(String fileName) throws Exception {
+	public static String readFile(InputStream fileName) throws Exception {
 		StringBuilder text = new StringBuilder();
-		Scanner scanner = new Scanner(new FileInputStream(fileName));
+		Scanner scanner = new Scanner(fileName);
 
 		try {
 			while (scanner.hasNextLine()) {
