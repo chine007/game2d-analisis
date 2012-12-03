@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="felder.model" default-access="field">
+	<class name="QuestionnaireILS" table="CUESTIONARIO_ILS" mutable="false">
+		<id name="id" column="idreg">
+			<!--  
+			<generator class="select">
+				<param name="key">lastName</param>
+			</generator>
+			-->
+			<generator class="sequence">
+				<param name="sequence">cuestionario_ILS_Generator</param>
+			</generator>
+		</id>
+
+		<property name="firstName" column="nombre"/>
+		<property name="lastName" column="apellido"/>
+		<property name="city" column="localidad"/>
+		<property name="birthDate" column="fechanacimiento" type="calendar_date"/>
+		<property name="sex" column="sexo"/>
+		<property name="mail"/>
+		<property name="country" column="pais"/>
+		<property name="province" column="provincia"/>
+		<component name="felder" class="felder.model.vt.FelderDimensionsValueType">
+			<property name="perception" column="int_sen"/>
+			<property name="processing" column="ref_act"/>
+			<property name="understanding" column="glo_sec"/>
+			<property name="input" column="ver_vis"/>
+		</component>
+		<property name="questionnaire" column="cuestionario"/>
+		<property name="registrationDate" column="fecha_inscripcion" type="calendar_date"/>
+	</class>
+</hibernate-mapping>
