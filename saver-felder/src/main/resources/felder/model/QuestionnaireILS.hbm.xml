@@ -9,10 +9,11 @@
 			<generator class="select">
 				<param name="key">lastName</param>
 			</generator>
-			-->
 			<generator class="sequence">
 				<param name="sequence">cuestionario_ILS_Generator</param>
 			</generator>
+			-->
+			<generator class="assigned"/>
 		</id>
 
 		<property name="firstName" column="nombre"/>
