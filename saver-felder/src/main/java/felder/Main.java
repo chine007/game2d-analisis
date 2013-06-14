@@ -1,38 +1,26 @@
 package felder;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import felder.model.QuestionnaireILS;
 import felder.utils.UtilsHibernate;
 
 public class Main {
-	private static SessionFactory sf;
-	
-	static {
-		Configuration configuration = new Configuration().configure("hibernate-game.cfg.xml");
-		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
-				.applySettings(configuration.getProperties())
-				.buildServiceRegistry();
-		sf = configuration.buildSessionFactory(serviceRegistry);
-	}
-	
 	
 	public static void main(String[] args) {
-		deleteFromGame();
-		copyFromSaverToGame();
+		deleteFromLocal();
+		copyFromSaverToLocal();
+		printLocal();
 	}
 
 	/**
 	 * Borra los datos de las encuestas de la BD local
 	 */
-	private static void deleteFromGame() {
-		Session session = sf.getCurrentSession();
+	private static void deleteFromLocal() {
+		Session session = UtilsHibernate.getCurrentSessionLocal();
 		session.beginTransaction();
 		session.createQuery("delete from QuestionnaireILS").executeUpdate();
 		session.getTransaction().commit();
@@ -41,8 +29,8 @@ public class Main {
 	/**
 	 * Copia los datos de las encuestas desde la BD de saver a la BD local
 	 */
-	private static void copyFromSaverToGame() {
-		Session session = sf.getCurrentSession();
+	private static void copyFromSaverToLocal() {
+		Session session = UtilsHibernate.getCurrentSessionLocal();
 		session.beginTransaction();
 		
 		int first = 0;
@@ -74,7 +62,7 @@ public class Main {
 	 */
 	@SuppressWarnings("unchecked")
 	private static List<QuestionnaireILS> getSaverQuestionnaries(int first, int max) {
-		Session session = UtilsHibernate.getCurrentSession();
+		Session session = UtilsHibernate.getCurrentSessionSaver();
 		session.beginTransaction();
 		
 		List<QuestionnaireILS> list = session
@@ -82,6 +70,29 @@ public class Main {
 				.setFirstResult(first)
 				.setMaxResults(max)
 				.list();
+		
+		session.getTransaction().commit();
+		return list;
+	}
+
+	/**
+	 * Imprime los datos por pantalla
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private static List<QuestionnaireILS> printLocal() {
+		Session session = UtilsHibernate.getCurrentSessionSaver();
+		session.beginTransaction();
+		
+		List<QuestionnaireILS> list = session
+				.createCriteria(QuestionnaireILS.class)
+				.list();
+		
+		for (QuestionnaireILS ils : list) {
+			System.out.println(ils.getFirstName() + " - " +
+			ils.getLastName() + " - " + 
+			Arrays.toString(ils.getQuestionnaire()));
+		}
 		
 		session.getTransaction().commit();
 		return list;

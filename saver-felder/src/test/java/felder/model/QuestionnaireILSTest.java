@@ -17,7 +17,7 @@ public class QuestionnaireILSTest {
 	
 	@Before
 	public void setUp() {
-		session = UtilsHibernate.getCurrentSession();
+		session = UtilsHibernate.getCurrentSessionSaver();
 		session.beginTransaction();
 	}
 	
@@ -48,7 +48,7 @@ public class QuestionnaireILSTest {
 	
 	@AfterClass
 	public static void tearDownClass() {
-		UtilsHibernate.getSessionFactory().close();
+//		UtilsHibernate.getSessionFactorySaver().close();
 	}
 	
 }
