@@ -138,7 +138,7 @@ public class FeatureMain {
 		int index = 0;
 		for (Data data : datas) {
 			mat1[index] = data.getPreference();
-			mat2[index++] = data.getUser().getPerception();
+			mat2[index++] = data.getUser().getPerceptionByCategory();
 		}
 		
 		System.out.println(pc.correlation(mat1, mat2));

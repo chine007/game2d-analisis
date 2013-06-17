@@ -26,6 +26,9 @@ public class User {
 		return processing;
 	}
 	public Integer getPerception() {
+		return perception;
+	}
+	public Integer getPerceptionByCategory() {
 		if (perception > 3) {
 			return 1;
 		} else if (perception > -5) {
@@ -44,7 +47,7 @@ public class User {
 	@Override
 	public String toString() {
 		return username + "\t" + firstName + "\t" + lastName + "\t"
-				+ getPerception();
+				+ getPerceptionByCategory();
 	}
 	@Override
 	public int hashCode() {
