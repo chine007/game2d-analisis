@@ -8,7 +8,14 @@ import org.hibernate.Session;
 import felder.model.QuestionnaireILS;
 import felder.utils.UtilsHibernate;
 
-public class Main {
+/**
+ * Copia los datos de la tabla SAVER.cuestionario_ils del sistema Saver
+ * a la tabla saver.cuestionario_ils local
+ * 
+ * @author Juan
+ *
+ */
+public class Main_RemoteSaver_LocalSaver {
 	
 	public static void main(String[] args) {
 		deleteFromLocal();
@@ -20,7 +27,7 @@ public class Main {
 	 * Borra los datos de las encuestas de la BD local
 	 */
 	private static void deleteFromLocal() {
-		Session session = UtilsHibernate.getCurrentSessionLocal();
+		Session session = UtilsHibernate.getCurrentSessionLocalSaver();
 		session.beginTransaction();
 		session.createQuery("delete from QuestionnaireILS").executeUpdate();
 		session.getTransaction().commit();
@@ -30,7 +37,7 @@ public class Main {
 	 * Copia los datos de las encuestas desde la BD de saver a la BD local
 	 */
 	private static void copyFromSaverToLocal() {
-		Session session = UtilsHibernate.getCurrentSessionLocal();
+		Session session = UtilsHibernate.getCurrentSessionLocalSaver();
 		session.beginTransaction();
 		
 		int first = 0;
@@ -62,7 +69,7 @@ public class Main {
 	 */
 	@SuppressWarnings("unchecked")
 	private static List<QuestionnaireILS> getSaverQuestionnaries(int first, int max) {
-		Session session = UtilsHibernate.getCurrentSessionSaver();
+		Session session = UtilsHibernate.getCurrentSessionRemoteSaver();
 		session.beginTransaction();
 		
 		List<QuestionnaireILS> list = session
@@ -81,7 +88,7 @@ public class Main {
 	 */
 	@SuppressWarnings("unchecked")
 	private static List<QuestionnaireILS> printLocal() {
-		Session session = UtilsHibernate.getCurrentSessionSaver();
+		Session session = UtilsHibernate.getCurrentSessionRemoteSaver();
 		session.beginTransaction();
 		
 		List<QuestionnaireILS> list = session

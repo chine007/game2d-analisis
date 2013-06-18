@@ -7,28 +7,42 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
 public abstract class UtilsHibernate {
-	private static SessionFactory sfSaver;
-	private static SessionFactory sfLocal;
+	private static SessionFactory sfRemoteSaver;
+	private static SessionFactory sfLocalSaver;
+	private static SessionFactory sfLocalGame2d;
 
 	static {
-		Configuration configuration = new Configuration().configure("hibernate-local.cfg.xml");
+		// conexion a game2d
+		Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
 		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
 				.applySettings(configuration.getProperties())
 				.buildServiceRegistry();
-		sfLocal = configuration.buildSessionFactory(serviceRegistry);
+		sfLocalGame2d = configuration.buildSessionFactory(serviceRegistry);
 
-		configuration = new Configuration().configure("hibernate-saver.cfg.xml");
+		// conexion local a saver
+		configuration = new Configuration().configure("hibernate-local-saver.cfg.xml");
 		serviceRegistry = new ServiceRegistryBuilder()
 				.applySettings(configuration.getProperties())
 				.buildServiceRegistry();
-		sfSaver = configuration.buildSessionFactory(serviceRegistry);
+		sfLocalSaver = configuration.buildSessionFactory(serviceRegistry);
+
+		// conexion remota a saver
+		configuration = new Configuration().configure("hibernate-remote-saver.cfg.xml");
+		serviceRegistry = new ServiceRegistryBuilder()
+				.applySettings(configuration.getProperties())
+				.buildServiceRegistry();
+		sfRemoteSaver = configuration.buildSessionFactory(serviceRegistry);
 	}
 	
-	public static Session getCurrentSessionLocal() {
-		return sfLocal.getCurrentSession();
+	public static Session getCurrentSessionLocalGame2d() {
+		return sfLocalGame2d.getCurrentSession();
 	}
 	
-	public static Session getCurrentSessionSaver() {
-		return sfSaver.getCurrentSession();
+	public static Session getCurrentSessionLocalSaver() {
+		return sfLocalSaver.getCurrentSession();
+	}
+	
+	public static Session getCurrentSessionRemoteSaver() {
+		return sfRemoteSaver.getCurrentSession();
 	}
 }
