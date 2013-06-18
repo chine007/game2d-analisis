@@ -36,15 +36,19 @@ public class LocalGame2dFelderValues {
 	
 	@Test
 	public void testCalculate() {
+		// obtiene todas las encuestas
 		List list = sessionLocalGame2d.createSQLQuery("select * from felder").list();
 		
 		for (Object quest : list) {
 			Object[] responses = (Object[]) quest;
+
+			// obtiene el usuario que respondio la encuesta
 			String username = (String) responses[45]; 
 			User user = (User) sessionLocalGame2d.createQuery("from User where username = :username")
 					.setString("username", username)
 					.uniqueResult();
 
+			// si el usuario existe y respondio la encuesta
 			if (user != null && user.getPerception() != 0) {
 				int[] felder = calculateFelder(responses, 1, 44, 1);
 				

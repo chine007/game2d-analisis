@@ -17,7 +17,7 @@ public class QuestionnaireILSTest {
 	
 	@Before
 	public void setUp() {
-		session = UtilsHibernate.getCurrentSessionRemoteSaver();
+		session = UtilsHibernate.getCurrentSessionLocalSaver();
 		session.beginTransaction();
 	}
 	
