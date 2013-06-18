@@ -7,10 +7,11 @@ import org.hibernate.Session;
 
 import features.persistence.model.User;
 import felder.model.QuestionnaireILS;
+import felder.utils.UtilsFelder;
 import felder.utils.UtilsHibernate;
 
 /**
- * Copia las respuestas del cuestionario de los alumnos desde
+ * Copia las respuestas del cuestionario desde
  * la tabla saver.cuestionario_ils local a la tabla game2d.felder
  * 
  * @author Juan
@@ -29,10 +30,13 @@ public class Main_LocalSaverAnswers_LocalGame2dAnswers {
 		Session sessionLocalSaver = UtilsHibernate.getCurrentSessionLocalSaver();
 		sessionLocalSaver.beginTransaction();
 		
-		// busca todos los usuarios que no tengan los valores de las encuestas
+		// busca todos los usuarios que no hayan contestado la encuesta de Felder antes de jugar
 		@SuppressWarnings("unchecked")
-		List<User> users = sessionLocalGame2d.createSQLQuery("select {u.*} from User {u} where not exists" +
-				"(select f.username from Felder f where {u}.username = f.username)")
+		List<User> users = sessionLocalGame2d.createSQLQuery(
+				"select {u.*} from User {u} " +
+				"left join Felder f " +
+				"on u.username = f.username " +
+				"where f.elapsedtime = 0")
 				.addEntity("u", User.class)
 				.list();
 		
@@ -52,7 +56,7 @@ public class Main_LocalSaverAnswers_LocalGame2dAnswers {
 		sb.delete(sb.length() - 2, sb.length())
 		.append(")");
 		
-		// itera todos los usuarios que no tienen los valores de las encuestas
+		// itera todos los usuarios que no hayan contestado la encuesta de Felder antes de jugar
 		for (User user : users) {
 			@SuppressWarnings("unchecked")
 			List<QuestionnaireILS> list = sessionLocalSaver.createQuery("from QuestionnaireILS q where q.firstName = :firstName and q.lastName = :lastName order by idreg")
@@ -60,8 +64,14 @@ public class Main_LocalSaverAnswers_LocalGame2dAnswers {
 					.setString("lastName", user.getLastName())
 					.list();
 			
-			// setea paremtros
+			
 			if (list.size() > 0) {
+				// borra las respuestas anteriores (si tenia)
+				sessionLocalGame2d.createSQLQuery("delete from Felder where username = :username")
+				.setString("username", user.getUsername())
+				.executeUpdate();
+				
+				// setea parametros
 				QuestionnaireILS ques = list.get(0);
 				Query query = sessionLocalGame2d.createSQLQuery(sb.toString());
 				for (int i = 0; i < 44; i++) {
@@ -72,6 +82,13 @@ public class Main_LocalSaverAnswers_LocalGame2dAnswers {
 				
 				// ejecuta el query
 				query.executeUpdate();
+				
+				// actualiza valores en la tabla user
+				int[] felder = UtilsFelder.calculateFelder(ques.getQuestionnaire(), 0, 43, 0);
+				user.setProcessing(felder[UtilsFelder.FELDER_PROCESSING]);
+				user.setPerception(felder[UtilsFelder.FELDER_PERCEPTION]);
+				user.setInput(felder[UtilsFelder.FELDER_INPUT]);
+				user.setUnderstanding(felder[UtilsFelder.FELDER_UNDERSTANDING]);
 			}
 		}
 		

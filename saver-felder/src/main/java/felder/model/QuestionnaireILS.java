@@ -16,7 +16,7 @@ public class QuestionnaireILS {
 	private String country;
 	private String province;
 	private FelderDimensionsValueType felder;
-	private byte[] questionnaire;
+	private Byte[] questionnaire;
 	private Calendar registrationDate;
 	
 	public Integer getId() {
@@ -49,7 +49,7 @@ public class QuestionnaireILS {
 	public FelderDimensionsValueType getFelder() {
 		return felder;
 	}
-	public byte[] getQuestionnaire() {
+	public Byte[] getQuestionnaire() {
 		return questionnaire;
 	}
 	public Calendar getRegistrationDate() {
@@ -67,7 +67,7 @@ public class QuestionnaireILS {
 	
 	public FelderDimensionsValueType calculate() {
 		int[] felder = new int[4];
-		byte[] quest = getQuestionnaire();
+		Byte[] quest = getQuestionnaire();
 		
 		int index = 0;
 		for (int i = 0; i < quest.length; i++) {

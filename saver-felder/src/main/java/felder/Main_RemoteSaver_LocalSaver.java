@@ -9,8 +9,8 @@ import felder.model.QuestionnaireILS;
 import felder.utils.UtilsHibernate;
 
 /**
- * Copia los datos de la tabla SAVER.cuestionario_ils del sistema Saver
- * a la tabla saver.cuestionario_ils local
+ * Copia TODOS los datos de la tabla SAVER.cuestionario_ils (Remota)
+ * a la tabla saver.cuestionario_ils (Local)
  * 
  * @author Juan
  *
@@ -24,7 +24,7 @@ public class Main_RemoteSaver_LocalSaver {
 	}
 
 	/**
-	 * Borra los datos de las encuestas de la BD local
+	 * Borra los datos de la BD local
 	 */
 	private static void deleteFromLocal() {
 		Session session = UtilsHibernate.getCurrentSessionLocalSaver();
@@ -34,7 +34,7 @@ public class Main_RemoteSaver_LocalSaver {
 	}
 	
 	/**
-	 * Copia los datos de las encuestas desde la BD de saver a la BD local
+	 * Copia los datos desde la BD de saver a la BD local
 	 */
 	private static void copyFromSaverToLocal() {
 		Session session = UtilsHibernate.getCurrentSessionLocalSaver();

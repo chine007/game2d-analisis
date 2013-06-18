@@ -44,6 +44,18 @@ public class User {
 	public Integer getUnderstanding() {
 		return understanding;
 	}
+	public void setProcessing(Integer processing) {
+		this.processing = processing;
+	}
+	public void setPerception(Integer perception) {
+		this.perception = perception;
+	}
+	public void setInput(Integer input) {
+		this.input = input;
+	}
+	public void setUnderstanding(Integer understanding) {
+		this.understanding = understanding;
+	}
 	@Override
 	public String toString() {
 		return username + "\t" + firstName + "\t" + lastName + "\t"

@@ -1,9 +1,14 @@
 package felder;
 
+import static felder.utils.UtilsFelder.FELDER_INPUT;
+import static felder.utils.UtilsFelder.FELDER_PERCEPTION;
+import static felder.utils.UtilsFelder.FELDER_PROCESSING;
+import static felder.utils.UtilsFelder.FELDER_UNDERSTANDING;
+import static felder.utils.UtilsFelder.calculateFelder;
+
 import java.util.List;
 
 import org.hibernate.Session;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +26,6 @@ import felder.utils.UtilsHibernate;
 @SuppressWarnings({"rawtypes"})
 public class LocalGame2dFelderValues {
 	private static Session sessionLocalGame2d;
-	public static final int FELDER_PROCESSING 		= 1;
-	public static final int FELDER_PERCEPTION 		= 2;
-	public static final int FELDER_INPUT 			= 3;
-	public static final int FELDER_UNDERSTANDING 	= 0;
 	
 	
 	@Before
@@ -45,7 +46,7 @@ public class LocalGame2dFelderValues {
 					.uniqueResult();
 
 			if (user != null && user.getPerception() != 0) {
-				int[] felder = calculateFelder(responses);
+				int[] felder = calculateFelder(responses, 1, 44, 1);
 				
 				System.out.printf("Username: %s - tabla felder: %d,%d,%d,%d - tabla user: %d,%d,%d,%d %n", 
 						username, 
@@ -62,25 +63,6 @@ public class LocalGame2dFelderValues {
 		}
 	}
 	
-	private int[] calculateFelder(Object[] responses) {
-		int values[] = new int [4];
-		int index = 1;
-		
-		// en 0 esta el id
-		for (int i = 1; i < 45; i++) {
-			int answer = (Integer) responses[i];
-			if (answer == 1) {
-				values[index]++;
-			} else {
-				values[index]--;
-			}
-			index = (index + 1) % 4;
-		}
-		
-		return values;
-	}
-
-	@After
 	public void tearDown() {
 		sessionLocalGame2d.getTransaction().commit();
 	}
