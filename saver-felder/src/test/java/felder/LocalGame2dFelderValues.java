@@ -48,8 +48,8 @@ public class LocalGame2dFelderValues {
 					.setString("username", username)
 					.uniqueResult();
 
-			// si el usuario existe y respondio la encuesta
-			if (user != null && user.getPerception() != 0) {
+			// si el usuario existe
+			if (user != null) {
 				int[] felder = calculateFelder(responses, 1, 44, 1);
 				
 				System.out.printf("Username: %s - tabla felder: %d,%d,%d,%d - tabla user: %d,%d,%d,%d %n", 
