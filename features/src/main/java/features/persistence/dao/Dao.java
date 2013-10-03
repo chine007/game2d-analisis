@@ -3,25 +3,15 @@ package features.persistence.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.classic.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 
 import features.persistence.model.Game;
 import features.persistence.model.ProfileGame;
+import features.utils.SessionManager;
 
 public class Dao {
-	private static SessionFactory sf;
-	
-	Session getSession() {
-		if (sf == null) {
-			sf = new Configuration().configure().buildSessionFactory();
-		}
-		return sf.getCurrentSession();
-	}
 	
 	/**
 	 * Retorna el maximo valor de una propiedad observada de un juego
@@ -31,7 +21,7 @@ public class Dao {
 	 * @return
 	 */
 	public Double getMax(Game game, String property) {
-		return ((Number) getSession().createCriteria(Game.class)
+		return ((Number) SessionManager.getSession().createCriteria(Game.class)
 		.createAlias("profileGame", "pf")
 		.add(Restrictions.eq("id", game.getId()))
 		.setProjection(Projections.max("pf." + property))
@@ -46,7 +36,7 @@ public class Dao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Game> getGamesByFeature(String featureCode) {
-		return getSession().createCriteria(Game.class)
+		return SessionManager.getSession().createCriteria(Game.class)
 		.createAlias("categories", "c")
 		.createAlias("c.features", "f")
 		.add(Restrictions.eq("f.code", featureCode))
@@ -64,7 +54,7 @@ public class Dao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ProfileGame> getProfileGame(Game game, Long minTimesPlayed, String userGroup, boolean neutralFilter) {
-		Criteria crit = getSession().createCriteria(ProfileGame.class)
+		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
 		.add(Restrictions.eq("game.id", game.getId()));
 		
 		// Filtra por grupo de usuario
@@ -99,12 +89,4 @@ public class Dao {
 		.list();
 	}
 	
-	public void beginTransaction() {
-		getSession().beginTransaction();
-	}
-	
-	public void commitTransaction() {
-		getSession().beginTransaction().commit();
-	}
-
 }

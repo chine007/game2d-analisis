@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import features.persistence.model.Feature;
 import features.persistence.model.Game;
-import features.persistence.model.GameCategory;
 import features.persistence.model.ProfileGame;
+import features.utils.SessionManager;
 
 public class TestDao {
 	private static Dao dao;
@@ -16,21 +16,18 @@ public class TestDao {
 	@BeforeClass
 	public static void before() {
 		dao = new Dao();
-		dao.beginTransaction();
+		SessionManager.beginTransaction();
 	}
 	
 	@Test
 	public void test() {
-		Session session = dao.getSession();
+		Session session = SessionManager.getSession();
 		
 		Game game = (Game) session.get(Game.class, "equilibrium");
 		System.out.println(game);
 		
-		for (GameCategory gc : game.getCategories()) {
-			System.out.println(gc);
-			for (Feature gf : gc.getFeatures()) {
-				System.out.println(gf);
-			}
+		for (Feature gf : game.getFeatures()) {
+			System.out.println(gf);
 		}
 	
 		for (ProfileGame pg : game.getProfileGame()) {
@@ -40,7 +37,7 @@ public class TestDao {
 
 	@AfterClass
 	public static void after() {
-		dao.commitTransaction();
+		SessionManager.commitTransaction();
 	}
 	
 	

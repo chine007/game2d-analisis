@@ -5,7 +5,7 @@ import java.util.Set;
 public class Game {
 	private String id;
 	private Integer levels;
-	private Set<GameCategory> categories;
+	private Set<Feature> features;
 	private Set<ProfileGame> profileGame;
 	
 	public String getId() {
@@ -14,8 +14,8 @@ public class Game {
 	public Integer getLevels() {
 		return levels;
 	}
-	public Set<GameCategory> getCategories() {
-		return categories;
+	public Set<Feature> getFeatures() {
+		return features;
 	}
 	public Set<ProfileGame> getProfileGame() {
 		return profileGame;

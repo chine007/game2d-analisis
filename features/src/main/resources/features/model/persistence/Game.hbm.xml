@@ -8,9 +8,9 @@
 			<generator class="assigned"/>
 		</id>
 		<property name="levels"/>
-		<set name="categories" table="game_gamecategory">
+		<set name="features" table="game_feature">
 			<key column="id_game"/>
-			<many-to-many class="GameCategory" column="id_gamecategory"/>
+			<many-to-many class="Feature" column="id_feature"/>
 		</set>
 		<set name="profileGame" inverse="true">
 			<key column="id_game"/>

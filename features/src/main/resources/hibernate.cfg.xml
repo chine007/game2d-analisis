@@ -19,7 +19,6 @@
 		<!-- mapping files -->
 		<mapping resource="features/model/persistence/Feature.hbm.xml" />
 		<mapping resource="features/model/persistence/Game.hbm.xml" />
-		<mapping resource="features/model/persistence/GameCategory.hbm.xml" />
 		<mapping resource="features/model/persistence/ProfileGame.hbm.xml" />
 		<mapping resource="features/model/persistence/User.hbm.xml" />
 	</session-factory>

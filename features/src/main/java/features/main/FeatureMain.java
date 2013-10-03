@@ -14,6 +14,7 @@ import features.persistence.model.Game;
 import features.persistence.model.ProfileGame;
 import features.persistence.model.User;
 import features.utils.Data;
+import features.utils.SessionManager;
 
 public class FeatureMain {
 	private Dao dao;
@@ -35,7 +36,7 @@ public class FeatureMain {
 	 */
 	private void analize() {
 		dao = new Dao();
-		dao.beginTransaction();
+		SessionManager.beginTransaction();
 
 		// Feature a analizar
 		String featureCode = "PI";
@@ -77,7 +78,7 @@ public class FeatureMain {
 //			System.out.println(data.getUser() + "\t" + data.getPreferenceToString());
 //		}
 	
-		dao.commitTransaction();
+		SessionManager.commitTransaction();
 	}
 	
 	/**
