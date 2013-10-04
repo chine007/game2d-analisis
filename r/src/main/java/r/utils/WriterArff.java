@@ -42,9 +42,11 @@ public class WriterArff {
 			}
 			return values.toString().replace("[", "{").replace("]", "}");
 		}
+		
 		if (Number.class.isAssignableFrom(clazz)) {
 			return "numeric";
 		}
+		
 		return "string";
 	}
 	
