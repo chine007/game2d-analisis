@@ -1,8 +1,10 @@
 package features.utils;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.classic.Session;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 public class SessionManager {
 	private static SessionFactory sf;
@@ -12,7 +14,11 @@ public class SessionManager {
 	
 	public static Session getSession() {
 		if (sf == null) {
-			sf = new Configuration().configure().buildSessionFactory();
+			Configuration configuration = new Configuration().configure();
+			ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
+					.applySettings(configuration.getProperties())
+					.buildServiceRegistry();
+			sf = configuration.buildSessionFactory(serviceRegistry);
 		}
 		return sf.getCurrentSession();
 	}
