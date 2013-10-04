@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class WritterArff {
 
@@ -13,7 +15,7 @@ public class WritterArff {
 			pw.println("@relation r");
 			pw.println("");
 			for (Entry<String, Object> entry : data.get(0).entrySet()) {
-				String type = getType(entry.getValue().getClass());
+				String type = getType(entry.getValue().getClass(), entry.getKey(), data);
 				pw.println(String.format("@attribute '%s' %s", entry.getKey(), type));
 			}
 			
@@ -32,9 +34,13 @@ public class WritterArff {
 		}
 	}
 
-	private String getType(Class<? extends Object> clazz) {
+	private String getType(Class<? extends Object> clazz, String key, List<Map<String, Object>> data) {
 		if (String.class.equals(clazz)) {
-			return "string";
+			Set<Object> values= new TreeSet<>();
+			for (Map<String, Object> map : data) {
+				values.add(map.get(key));
+			}
+			return values.toString().replace("[", "{").replace("]", "}");
 		}
 		if (Number.class.isAssignableFrom(clazz)) {
 			return "numeric";

@@ -111,7 +111,7 @@ public class DbFacade {
 		)
 		.addOrder(Order.asc("username"));
 		
-		return (Map<?, ?>) crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).list().get(0);
+		return (Map<?, ?>) crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

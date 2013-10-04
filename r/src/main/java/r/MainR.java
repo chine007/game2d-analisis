@@ -66,6 +66,7 @@ public class MainR {
 		double profileTimesPlayed = ((Number)profile.get("timesPlayed")).doubleValue();
 		double profileTime = ((Number)profile.get("time")).doubleValue();
 		double profileLevel = ((Number)profile.get("level")).doubleValue();
+		
 		return 0.33 * (profileTimesPlayed/maxTimesPlayed + 
 				profileTime/maxTime + 
 				profileLevel/maxLevel);
