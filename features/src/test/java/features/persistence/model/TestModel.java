@@ -1,4 +1,4 @@
-package features.persistence.dao;
+package features.persistence.model;
 
 import org.hibernate.classic.Session;
 import org.junit.AfterClass;
@@ -10,7 +10,7 @@ import features.persistence.model.Game;
 import features.persistence.model.ProfileGame;
 import features.utils.SessionManager;
 
-public class TestDao {
+public class TestModel {
 	
 	@BeforeClass
 	public static void before() {
