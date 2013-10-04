@@ -11,9 +11,9 @@ import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import features.persistence.model.Feature;
-import features.persistence.model.Game;
-import features.persistence.model.ProfileGame;
+import features.model.Feature;
+import features.model.Game;
+import features.model.ProfileGame;
 import features.utils.SessionManager;
 
 public class DbFacade {

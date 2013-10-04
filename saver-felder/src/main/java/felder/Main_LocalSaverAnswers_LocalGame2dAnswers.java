@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import features.persistence.model.User;
+import features.model.User;
 import felder.model.QuestionnaireILS;
 import felder.utils.UtilsHibernate;
 

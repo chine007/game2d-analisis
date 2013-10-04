@@ -17,9 +17,9 @@
 		<property name="format_sql">true</property>
 
 		<!-- mapping files -->
-		<mapping resource="features/model/persistence/Feature.hbm.xml" />
-		<mapping resource="features/model/persistence/Game.hbm.xml" />
-		<mapping resource="features/model/persistence/ProfileGame.hbm.xml" />
-		<mapping resource="features/model/persistence/User.hbm.xml" />
+		<mapping resource="features/model/Feature.hbm.xml" />
+		<mapping resource="features/model/Game.hbm.xml" />
+		<mapping resource="features/model/ProfileGame.hbm.xml" />
+		<mapping resource="features/model/User.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

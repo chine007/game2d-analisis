@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import features.persistence.model.User;
+import features.model.User;
 import felder.utils.UtilsHibernate;
 
 /**

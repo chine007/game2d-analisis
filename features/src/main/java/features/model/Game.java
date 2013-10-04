@@ -1,4 +1,4 @@
-package features.persistence.model;
+package features.model;
 
 import java.util.Set;
 

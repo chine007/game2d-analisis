@@ -1,13 +1,13 @@
-package features.persistence.model;
+package features.model;
 
 import org.hibernate.classic.Session;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import features.persistence.model.Feature;
-import features.persistence.model.Game;
-import features.persistence.model.ProfileGame;
+import features.model.Feature;
+import features.model.Game;
+import features.model.ProfileGame;
 import features.utils.SessionManager;
 
 public class TestModel {

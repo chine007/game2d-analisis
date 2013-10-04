@@ -1,4 +1,4 @@
-package features.persistence.model;
+package features.model;
 
 public class ProfileGame {
 	private Long id;
