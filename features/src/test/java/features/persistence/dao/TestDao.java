@@ -11,11 +11,9 @@ import features.persistence.model.ProfileGame;
 import features.utils.SessionManager;
 
 public class TestDao {
-	private static Dao dao;
 	
 	@BeforeClass
 	public static void before() {
-		dao = new Dao();
 		SessionManager.beginTransaction();
 	}
 	

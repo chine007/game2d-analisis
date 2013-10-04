@@ -22,6 +22,7 @@ public class DbFacade {
 	private static final int FELDER_SEN_LO = 5;
 	private static final int FELDER_SEN_HI = 11;
 		
+	
 	public int getMaxTimesPlayedByGame(String game) {
 		return getMaxCriteria(game, "maxTimesPlayed", Projections.projectionList()
 				.add(Projections.rowCount(), "maxTimesPlayed")
@@ -53,12 +54,10 @@ public class DbFacade {
 		.setProjection(projList
 				.add(Projections.groupProperty("user.username"))
 		)
+		.setMaxResults(1)
 		.addOrder(Order.desc(orderProperty));
 		
-		@SuppressWarnings("unchecked")
-		List<Object[]> res = crit.list();
-		
-		return (Number) res.get(0)[0];
+		return (Number)((Object[])crit.uniqueResult())[0];
 	}
 
 	@SuppressWarnings("unchecked")
