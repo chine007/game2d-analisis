@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import r.db.DbFacade;
-import r.utils.WritterArff;
+import r.utils.WriterArff;
 import features.utils.SessionManager;
 
 public class MainR {
@@ -54,7 +54,7 @@ public class MainR {
 		
 		SessionManager.commitTransaction();
 		
-		new WritterArff().write(arffPath, result);
+		new WriterArff().write(arffPath, result);
 	}
 	
 	private double getPreference(Map<?, ?> profile,

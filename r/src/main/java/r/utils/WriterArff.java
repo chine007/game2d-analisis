@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class WritterArff {
+public class WriterArff {
 
 	public void write(String file, List<Map<String, Object>> data) {
 		try (PrintWriter pw = new PrintWriter(file)) {
