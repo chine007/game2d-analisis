@@ -5,12 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import r.db.DbFacade;
 import r.utils.WriterArff;
 import features.utils.SessionManager;
 
 public class MainR {
-//	private static Logger logger = Logger.getLogger(MainR.class);
+	private static Logger logger = Logger.getLogger(MainR.class);
 	private DbFacade db = new DbFacade();
 	
 	public static void main(String[] args) {
@@ -18,6 +20,7 @@ public class MainR {
 	}
 	
 	public void generateArff(String arffPath) {
+		logger.info("================== Starting Java code ==================");
 		SessionManager.beginTransaction();
 
 		// result
