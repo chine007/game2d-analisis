@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.log4j.Logger;
 
 import r.db.DbFacade;
@@ -29,6 +30,7 @@ public class MainR {
 		// get perception - user - game
 		List<Map<?, ?>> data = db.getData();
 		
+		DescriptiveStatistics ds = new DescriptiveStatistics();
 		for (Map<?, ?> record : data) {
 			String game = (String) record.get("game");
 			String username = (String) record.get("username");
@@ -39,7 +41,7 @@ public class MainR {
 			
 			// get preference 
 			double preference = getPreference(profile, game);
-			String preferenceDisc = getPreferenceDisc(preference);
+			ds.addValue(preference);
 			
 			// get games features
 			Map<String,Integer> gameFeatures = db.getGameFeatures(game);
@@ -50,13 +52,16 @@ public class MainR {
 			entry.put("username", username);
 			entry.put("perception", perception);
 			entry.putAll(gameFeatures);
-			entry.put("preferenceDisc", preferenceDisc);
 			entry.put("preference", preference);
 			result.add(entry);
 		}
 		
 		SessionManager.commitTransaction();
 		
+		// discretize preference
+		discretizePreference(result, ds.getPercentile(50));
+		
+		// generate arff
 		new WriterArff().write(arffPath, result);
 	}
 	
@@ -73,8 +78,8 @@ public class MainR {
 		double profileLevel = ((Number)profile.get("level")).doubleValue();
 		
 		// factors
-		int factorTimesPlayed = 6;
-		int factorTime = 3;
+		int factorTimesPlayed = 100;
+		int factorTime = 10;
 		int factorLevel = 1;
 		int factorTotal = factorTimesPlayed + factorTime + factorLevel; 
 		
@@ -91,11 +96,12 @@ public class MainR {
 		return val;
 	}
 
-	private String getPreferenceDisc(double preference) {
-		if (preference <= .50) {
-			return "B";
-		} else {
-			return "A";
+	private void discretizePreference(List<Map<String, Object>> result, double median) {
+		for (Map<String, Object> entry : result) {
+			entry.put("preferenceDisc", "B");
+			if (((Number)entry.get("preference")).doubleValue() > median) {
+				entry.put("preferenceDisc", "A");
+			}
 		}
 	}
 
