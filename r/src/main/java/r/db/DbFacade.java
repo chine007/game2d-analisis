@@ -24,7 +24,7 @@ public class DbFacade {
 	private static final int FELDER_SEN_HI = 11;
 		
 	/***********************************************************
-							MAX VALUES					
+	 * MAX VALUES
 	 ************************************************************/
 	public int getMaxTimesPlayedByGame(String game) {
 		return getMaxCriteria(game, "maxTimesPlayed", Projections.projectionList()
@@ -59,8 +59,8 @@ public class DbFacade {
 	}
 
 	/***********************************************************
-								DATA
-	************************************************************/
+	 * DATA
+	 ************************************************************/
 	@SuppressWarnings("unchecked")
 	public List<Map<?,?>> getData() {
 		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
@@ -80,8 +80,8 @@ public class DbFacade {
 	}
 
 	/***********************************************************
-								PROFILE							
-	************************************************************/
+	 * PROFILE
+	 ************************************************************/
 	public Map<?,?> getProfile(String game, String username) {
 		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
 		.createAlias("user", "u")
@@ -108,8 +108,8 @@ public class DbFacade {
 	}
 
 	/***********************************************************
-							GAME FEATURES
-	************************************************************/
+	 * GAME FEATURES
+	 ************************************************************/
 	@SuppressWarnings("unchecked")
 	public Map<String,Integer> getGameFeatures(String gameId) {
 		List<Feature> features = SessionManager.getSession().createCriteria(Feature.class).list();
