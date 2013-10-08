@@ -70,13 +70,19 @@ public class MainR {
 		double profileTime = ((Number)profile.get("time")).doubleValue();
 		double profileLevel = ((Number)profile.get("level")).doubleValue();
 		
-		return 0.33 * (profileTimesPlayed/maxTimesPlayed + 
+		double val = 0.33 * (profileTimesPlayed/maxTimesPlayed + 
 				profileTime/maxTime + 
 				profileLevel/maxLevel);
+		
+		if (val > 1) {
+			throw new IllegalArgumentException("Error al analizar el juego " + game);
+		}
+		
+		return val;
 	}
 
 	private String getPreferenceDisc(double preference) {
-		if (preference <= .6) {
+		if (preference <= .50) {
 			return "B";
 		} else {
 			return "A";

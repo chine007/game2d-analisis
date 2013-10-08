@@ -34,7 +34,7 @@ public class DbFacade {
 	
 	public int getMaxTimeByGame(String game) {
 		return getMaxCriteria(game, "time", Projections.projectionList()
-				.add(Projections.avg("time"), "time")
+				.add(Projections.max("time"), "time")
 		).intValue();
 	}
 	
