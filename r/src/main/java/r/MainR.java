@@ -46,13 +46,15 @@ public class MainR {
 			// get games features
 			Map<String,Integer> gameFeatures = db.getGameFeatures(game);
 			
-			// generate output
+			// add record
 			Map<String, Object> entry = new LinkedHashMap<>();
+			// columns to filter
 			entry.put("game", game);
 			entry.put("username", username);
+			entry.put("preference", preference);
+			// columns data
 			entry.put("perception", perception);
 			entry.putAll(gameFeatures);
-			entry.put("preference", preference);
 			result.add(entry);
 		}
 		
