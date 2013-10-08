@@ -62,18 +62,28 @@ public class MainR {
 	
 	private double getPreference(Map<?, ?> profile,
 			String game) {
+		// max values
 		double maxTimesPlayed = db.getMaxTimesPlayedByGame(game);
 		double maxTime = db.getMaxTimeByGame(game);
 		double maxLevel = db.getMaxLevelByGame(game);
 		
+		// profile values
 		double profileTimesPlayed = ((Number)profile.get("timesPlayed")).doubleValue();
 		double profileTime = ((Number)profile.get("time")).doubleValue();
 		double profileLevel = ((Number)profile.get("level")).doubleValue();
 		
-		double val = 0.33 * (profileTimesPlayed/maxTimesPlayed + 
-				profileTime/maxTime + 
-				profileLevel/maxLevel);
+		// factors
+		int factorTimesPlayed = 6;
+		int factorTime = 3;
+		int factorLevel = 1;
+		int factorTotal = factorTimesPlayed + factorTime + factorLevel; 
 		
+		// preference
+		double val = (factorTimesPlayed * profileTimesPlayed/maxTimesPlayed + 
+				factorTime * profileTime/maxTime + 
+				factorLevel * profileLevel/maxLevel) / factorTotal;
+		
+		// checking
 		if (val > 1) {
 			throw new IllegalArgumentException("Error al analizar el juego " + game);
 		}
