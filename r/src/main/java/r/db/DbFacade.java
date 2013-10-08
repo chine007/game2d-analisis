@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
@@ -22,7 +23,9 @@ public class DbFacade {
 	private static final int FELDER_SEN_LO = 5;
 	private static final int FELDER_SEN_HI = 11;
 		
-	
+	/***********************************************************
+							MAX VALUES					
+	 ************************************************************/
 	public int getMaxTimesPlayedByGame(String game) {
 		return getMaxCriteria(game, "maxTimesPlayed", Projections.projectionList()
 				.add(Projections.rowCount(), "maxTimesPlayed")
@@ -45,12 +48,7 @@ public class DbFacade {
 		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
 		.createAlias("user", "u")
 		.add(Restrictions.eq("game.id", game))
-		.add(Restrictions
-				.or(
-					Restrictions.between("u.perception", FELDER_INT_HI, FELDER_INT_LO),
-					Restrictions.between("u.perception", FELDER_SEN_LO, FELDER_SEN_HI)
-				)
-		)
+		.add(felderRestriction())
 		.setProjection(projList
 				.add(Projections.groupProperty("user.username"))
 		)
@@ -60,17 +58,15 @@ public class DbFacade {
 		return (Number)((Object[])crit.uniqueResult())[0];
 	}
 
+	/***********************************************************
+								DATA
+	************************************************************/
 	@SuppressWarnings("unchecked")
 	public List<Map<?,?>> getData() {
 		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
 		.createAlias("user", "u")
 		.createAlias("game", "g")
-		.add(Restrictions
-				.or(
-					Restrictions.between("u.perception", FELDER_INT_HI, FELDER_INT_LO),
-					Restrictions.between("u.perception", FELDER_SEN_LO, FELDER_SEN_HI)
-				)
-		)
+		.add(felderRestriction())
 		.setProjection(Projections.projectionList()
 				.add(Projections.groupProperty("u.perception"), "perception")
 				.add(Projections.groupProperty("u.username"), "username")
@@ -83,6 +79,9 @@ public class DbFacade {
 		return crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).list();
 	}
 
+	/***********************************************************
+								PROFILE							
+	************************************************************/
 	public Map<?,?> getProfile(String game, String username) {
 		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
 		.createAlias("user", "u")
@@ -90,13 +89,8 @@ public class DbFacade {
 		.add(Restrictions
 				.and(
 						Restrictions.eq("g.id", game),
-						Restrictions.and(
-									Restrictions.eq("u.username", username),
-									Restrictions.or(
-										Restrictions.between("u.perception", FELDER_INT_HI, FELDER_INT_LO),
-										Restrictions.between("u.perception", FELDER_SEN_LO, FELDER_SEN_HI)
-									)
-						)
+						Restrictions.eq("u.username", username),
+						felderRestriction()
 				)
 		)
 		.setProjection(Projections.projectionList()
@@ -113,6 +107,9 @@ public class DbFacade {
 		return (Map<?, ?>) crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).uniqueResult();
 	}
 
+	/***********************************************************
+							GAME FEATURES
+	************************************************************/
 	@SuppressWarnings("unchecked")
 	public Map<String,Integer> getGameFeatures(String gameId) {
 		List<Feature> features = SessionManager.getSession().createCriteria(Feature.class).list();
@@ -129,6 +126,13 @@ public class DbFacade {
 		}
 		
 		return gameFeatures;
+	}
+	
+	private Criterion felderRestriction() {
+		return Restrictions.or(
+				Restrictions.between("u.perception", FELDER_INT_HI, FELDER_INT_LO),
+				Restrictions.between("u.perception", FELDER_SEN_LO, FELDER_SEN_HI)
+		);
 	}
 
 }
