@@ -10,8 +10,8 @@ import r.utils.WriterArff;
 import features.utils.SessionManager;
 
 public class MainR {
+//	private static Logger logger = Logger.getLogger(MainR.class);
 	private DbFacade db = new DbFacade();
-
 	
 	public static void main(String[] args) {
 		new MainR().generateArff("c:/Temp/r.arff");
