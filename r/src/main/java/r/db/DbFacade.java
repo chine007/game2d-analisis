@@ -27,8 +27,8 @@ public class DbFacade {
 	 * MAX VALUES
 	 ************************************************************/
 	public int getMaxTimesPlayedByGame(String game) {
-		return getMaxCriteria(game, "maxTimesPlayed", Projections.projectionList()
-				.add(Projections.rowCount(), "maxTimesPlayed")
+		return getMaxCriteria(game, "timesPlayed", Projections.projectionList()
+				.add(Projections.rowCount(), "timesPlayed")
 		).intValue();
 	}
 	
@@ -41,6 +41,18 @@ public class DbFacade {
 	public int getMaxLevelByGame(String game) {
 		return getMaxCriteria(game, "level", Projections.projectionList()
 				.add(Projections.max("level"), "level")
+		).intValue();
+	}
+	
+	public int getMaxCorrectAnswersByGame(String game) {
+		return getMaxCriteria(game, "correctAnswers", Projections.projectionList()
+				.add(Projections.sum("correctAnswers"), "correctAnswers")
+		).intValue();
+	}
+	
+	public int getMaxIncorrectAnswersByGame(String game) {
+		return getMaxCriteria(game, "incorrectAnswers", Projections.projectionList()
+				.add(Projections.sum("incorrectAnswers"), "incorrectAnswers")
 		).intValue();
 	}
 	

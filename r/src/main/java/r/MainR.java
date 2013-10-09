@@ -70,35 +70,55 @@ public class MainR {
 	private double getPreference(Map<?, ?> profile,
 			String game) {
 		// max values
-		double maxTimesPlayed = db.getMaxTimesPlayedByGame(game);
-		double maxTime = db.getMaxTimeByGame(game);
-		double maxLevel = db.getMaxLevelByGame(game);
+		double maxTimesPlayed = getMax(db.getMaxTimesPlayedByGame(game));
+		double maxTime = getMax(db.getMaxTimeByGame(game));
+		double maxLevel = getMax(db.getMaxLevelByGame(game));
+		double maxCorrectAnswers = getMax(db.getMaxCorrectAnswersByGame(game));
+		double maxIncorrectAnswers = getMax(db.getMaxIncorrectAnswersByGame(game));
 		
 		// profile values
 		double profileTimesPlayed = ((Number)profile.get("timesPlayed")).doubleValue();
 		double profileTime = ((Number)profile.get("time")).doubleValue();
 		double profileLevel = ((Number)profile.get("level")).doubleValue();
+		double profileCorrectAnswers = ((Number)profile.get("correctAnswers")).doubleValue();
+		double profileIncorrectAnswers = ((Number)profile.get("incorrectAnswers")).doubleValue();
 		
 		// factors
 		int factorTimesPlayed = 100;
 		int factorTime = 10;
-		int factorLevel = 1;
-		int factorTotal = factorTimesPlayed + factorTime + factorLevel; 
+		int factorLevel = 0;
+		int factorCorrectAnswers = 0;
+		int factorIncorrectAnswers = 0;
+		int factorTotal = factorTimesPlayed + factorTime + factorLevel
+				+ factorCorrectAnswers + factorIncorrectAnswers;
 		
 		// preference
-		double val = (factorTimesPlayed * profileTimesPlayed/maxTimesPlayed + 
+		double val = (
+				factorTimesPlayed * profileTimesPlayed/maxTimesPlayed + 
 				factorTime * profileTime/maxTime + 
-				factorLevel * profileLevel/maxLevel) / factorTotal;
+				factorLevel * profileLevel/maxLevel +
+				factorCorrectAnswers * profileCorrectAnswers/maxCorrectAnswers +
+				factorIncorrectAnswers * profileIncorrectAnswers/maxIncorrectAnswers
+		) / factorTotal;
 		
 		// checking
 		if (val > 1) {
-			throw new IllegalArgumentException("Error al analizar el juego " + game);
+			throw new AssertionError("Error al analizar el juego " + game);
 		}
 		
 		return val;
 	}
 
+	private double getMax(Number value) {
+		if (value.doubleValue() == 0) {
+			return 1.0;
+		}
+		return value.doubleValue();
+	}
+
 	private void discretizePreference(List<Map<String, Object>> result, double median) {
+		logger.info("Median: " + median);
+		
 		for (Map<String, Object> entry : result) {
 			entry.put("preferenceDisc", "B");
 			if (((Number)entry.get("preference")).doubleValue() > median) {
