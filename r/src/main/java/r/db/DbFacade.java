@@ -22,7 +22,11 @@ public class DbFacade {
 	private static final int FELDER_INT_LO = -5;
 	private static final int FELDER_SEN_LO = 5;
 	private static final int FELDER_SEN_HI = 11;
-		
+
+//	private static final String usergroup = "progexpl2013";
+	private static final String usergroup = "nothing";
+	
+	
 	/***********************************************************
 	 * MAX VALUES
 	 ************************************************************/
@@ -61,6 +65,7 @@ public class DbFacade {
 		.createAlias("user", "u")
 		.add(Restrictions.eq("game.id", game))
 		.add(felderRestriction())
+		.add(usergroupRestriction())
 		.setProjection(projList
 				.add(Projections.groupProperty("user.username"))
 		)
@@ -79,6 +84,7 @@ public class DbFacade {
 		.createAlias("user", "u")
 		.createAlias("game", "g")
 		.add(felderRestriction())
+		.add(usergroupRestriction())
 		.setProjection(Projections.projectionList()
 				.add(Projections.groupProperty("u.perception"), "perception")
 				.add(Projections.groupProperty("u.username"), "username")
@@ -98,13 +104,10 @@ public class DbFacade {
 		Criteria crit = SessionManager.getSession().createCriteria(ProfileGame.class)
 		.createAlias("user", "u")
 		.createAlias("game", "g")
-		.add(Restrictions
-				.and(
-						Restrictions.eq("g.id", game),
-						Restrictions.eq("u.username", username),
-						felderRestriction()
-				)
-		)
+		.add(Restrictions.eq("g.id", game))
+		.add(Restrictions.eq("u.username", username))
+		.add(felderRestriction())
+		.add(usergroupRestriction())
 		.setProjection(Projections.projectionList()
 				.add(Projections.groupProperty("u.username"), "username")
 				.add(Projections.groupProperty("u.perception"), "perception")
@@ -145,6 +148,10 @@ public class DbFacade {
 				Restrictions.between("u.perception", FELDER_INT_HI, FELDER_INT_LO),
 				Restrictions.between("u.perception", FELDER_SEN_LO, FELDER_SEN_HI)
 		);
+	}
+
+	private Criterion usergroupRestriction() {
+		return Restrictions.ne("u.userGroup", usergroup).ignoreCase();
 	}
 
 }
