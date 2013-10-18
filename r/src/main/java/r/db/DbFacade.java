@@ -134,9 +134,9 @@ public class DbFacade {
 		
 		Map<String,Integer> gameFeatures = new LinkedHashMap<String, Integer>(); 
 		for (Feature feature : features) {
-			gameFeatures.put(feature.getDescription(), 0);
+			gameFeatures.put(feature.getCode(), 0);
 			if (game.getFeatures().contains(feature)) {
-				gameFeatures.put(feature.getDescription(), 1);
+				gameFeatures.put(feature.getCode(), 1);
 			}
 		}
 		
