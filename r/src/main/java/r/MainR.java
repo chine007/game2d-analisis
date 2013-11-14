@@ -12,14 +12,19 @@ import r.db.DbFacade;
 import r.utils.WriterArff;
 import features.utils.SessionManager;
 
+@SuppressWarnings("unused")
 public class MainR {
 	private static Logger logger = Logger.getLogger(MainR.class);
 	private DbFacade db = new DbFacade();
+	@SuppressWarnings("rawtypes")
+	private Map cacheGameFeatures = new LinkedHashMap<>();
+	
 	
 	public static void main(String[] args) {
 		new MainR().generateArff("c:/Temp/r.arff");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void generateArff(String arffPath) {
 		logger.info("================== Starting Java code ==================");
 		SessionManager.beginTransaction();
@@ -37,14 +42,23 @@ public class MainR {
 			Integer perception = (Integer) record.get("perception");
 
 			// get profile
-			Map<?, ?> profile = db.getProfile(game, username);
+//			Map<?, ?> profile = db.getProfile(game, username);
 			
 			// get preference 
-			double preference = getPreference(profile, game);
+//			Double preference = getPreferenceByFormula(profile, game);
+			Double preference = db.getPreference(username, game);
+			if (preference == null) {
+				continue;
+			}
 			ds.addValue(preference);
 			
 			// get games features
-			Map<String,Integer> gameFeatures = db.getGameFeatures(game);
+			Map<String,Double> gameFeatures = (Map<String, Double>) cacheGameFeatures.get(game);
+			if (gameFeatures == null) {
+	//			Map<String,Double> gameFeatures = db.getGameFeaturesByJuan(game);
+				gameFeatures = db.getGameFeaturesByStudents(game);
+				cacheGameFeatures.put(game, gameFeatures);
+			}
 			
 			// add record
 			Map<String, Object> entry = new LinkedHashMap<>();
@@ -67,7 +81,7 @@ public class MainR {
 		new WriterArff().write(arffPath, result);
 	}
 	
-	private double getPreference(Map<?, ?> profile,
+	private Double getPreferenceByFormula(Map<?, ?> profile,
 			String game) {
 		// max values
 		double maxTimesPlayed = getMax(db.getMaxTimesPlayedByGame(game));

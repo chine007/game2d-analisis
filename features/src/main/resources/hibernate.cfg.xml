@@ -21,5 +21,7 @@
 		<mapping resource="features/model/Game.hbm.xml" />
 		<mapping resource="features/model/ProfileGame.hbm.xml" />
 		<mapping resource="features/model/User.hbm.xml" />
+		<mapping resource="features/model/TestGameFeature.hbm.xml" />
+		<mapping resource="features/model/TestPreference.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
