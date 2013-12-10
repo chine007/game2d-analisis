@@ -12,16 +12,25 @@ import r.db.DbFacade;
 import r.utils.WriterArff;
 import features.utils.SessionManager;
 
+/**
+ * Genera un ARFF con todos los features de los juegos (timesPlayed, level, time, etc) y el valor
+ * de preferencia seteado por los estudiantes en la encuesta. 
+ * La preferencia se discretiza en base a la media. 
+ * Los registros estan agrupados por usuario y por juego.
+ * 
+ * @author Juan
+ *
+ */
 @SuppressWarnings("unused")
-public class MainR {
-	private static Logger logger = Logger.getLogger(MainR.class);
+public class MainGameFeatures {
+	private static Logger logger = Logger.getLogger(MainGameFeatures.class);
 	private DbFacade db = new DbFacade();
 	@SuppressWarnings("rawtypes")
 	private Map cacheGameFeatures = new LinkedHashMap<>();
 	
 	
 	public static void main(String[] args) {
-		new MainR().generateArff("c:/Temp/r.arff");
+		new MainGameFeatures().generateArff("c:/Temp/r.arff");
 	}
 	
 	@SuppressWarnings("unchecked")

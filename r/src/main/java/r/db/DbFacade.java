@@ -180,10 +180,47 @@ public class DbFacade {
 		
 		return val != null ? val.doubleValue() : null;
 	}
+	
+	/***********************************************************
+	 * VARIABLES AND PREFERENCE
+	 ************************************************************/
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> getVariablesPreference() {
+		return SessionManager.getSession().createSQLQuery(
+				"SELECT u.username AS username, " +
+				"p.id_game AS game, " +
+                "u.perception AS perception, " +
+                "CAST(pr.value AS UNSIGNED) AS preference, " +
+                "count(*) AS timesPlayed, " +
+                "max(p.level) AS level, " +
+                "max(p.`time`) AS time, " +
+                "sum(p.correctAnswers) AS correctAnswers, " +
+                "sum(p.incorrectAnswers) AS incorrectAnswers, " +
+                "sum(p.movs) AS movs, " +
+                "sum(p.movs_in) AS movs_in, " +
+                "sum(p.movs_out) AS movs_out, " +
+                "sum(p.help) AS help, " +
+                "sum(p.timeout) AS timeout " +
+          "FROM profilegame p " +
+          "INNER JOIN user u " +
+          "ON u.username = p.username " +
+          "INNER JOIN test_preference pr " +
+          "ON u.username = pr.username AND p.id_game = pr.id_game " +
+          "GROUP BY p.username, p.id_game " +
+          "ORDER BY p.username, p.id_game")
+          .setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP)
+          .list();
+	}
 
 	/***********************************************************
 	 * UTILS
 	 ************************************************************/
+	@SuppressWarnings("unchecked")
+	public List<String> getGames() {
+		return SessionManager.getSession().createCriteria(Game.class)
+		.list();
+	}
+
 	private Criterion felderRestriction() {
 		return Restrictions.or(
 				Restrictions.between("u.perception", FELDER_INT_HI, FELDER_INT_LO),
