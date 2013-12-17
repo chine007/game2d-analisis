@@ -26,10 +26,7 @@ public class DbFacade {
 	private static final int FELDER_SEN_LO = 5;
 	private static final int FELDER_SEN_HI = 11;
 
-	private static final String usergroup = "progexpl2013";
-//	private static final String usergroup = "nothing";
-	
-	
+
 	/***********************************************************
 	 * MAX VALUES
 	 ************************************************************/
@@ -229,7 +226,8 @@ public class DbFacade {
 	}
 
 	private Criterion usergroupRestriction() {
-		return Restrictions.eq("u.userGroup", usergroup).ignoreCase();
+//		return Restrictions.eq("u.userGroup", "progexpl2013").ignoreCase();
+		return Restrictions.ne("u.userGroup", "nothing").ignoreCase();
 	}
 
 }
