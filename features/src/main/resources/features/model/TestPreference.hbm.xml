@@ -3,7 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="features.model" default-access="field">
-	<class name="TestPreference" table="test_preference">
+	<class name="TestPreference" table="test_preference_mod2">
 		<id name="id">
 			<generator class="identity"/>
 		</id>

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.log4j.Logger;
 
 import r.db.DbFacade;
+import r.utils.Discretizer;
 import r.utils.WriterArff;
 import features.utils.SessionManager;
 
@@ -30,7 +32,7 @@ public class MainGameFeatures {
 	
 	
 	public static void main(String[] args) {
-		new MainGameFeatures().generateArff("c:/Temp/r.arff");
+		new MainGameFeatures().generateArff("c:/Temp/j-features.arff");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -49,6 +51,9 @@ public class MainGameFeatures {
 			String game = (String) record.get("game");
 			String username = (String) record.get("username");
 			Integer perception = (Integer) record.get("perception");
+			Integer processing = (Integer) record.get("processing");
+			Integer input = (Integer) record.get("input");
+			Integer understanding = (Integer) record.get("understanding");
 
 			// get profile
 //			Map<?, ?> profile = db.getProfile(game, username);
@@ -75,16 +80,24 @@ public class MainGameFeatures {
 			entry.put("game", game);
 			entry.put("username", username);
 			entry.put("preference", preference);
-			// columns data
-			entry.put("perception", perception);
-			entry.putAll(gameFeatures);
+			// columns learning styles 
+			entry.put("ls_perception", Discretizer.discretizeFelderDimension(perception));
+			entry.put("ls_processing", Discretizer.discretizeFelderDimension(processing));
+			entry.put("ls_input", Discretizer.discretizeFelderDimension(input));
+			entry.put("ls_understanding", Discretizer.discretizeFelderDimension(understanding));
+			// columns features
+			for (Entry<?, ?> feat : gameFeatures.entrySet()) {
+				entry.put("f_" + feat.getKey(), feat.getValue());
+			}
+			
+			// add row
 			result.add(entry);
 		}
 		
 		SessionManager.commitTransaction();
 		
 		// discretize preference
-		discretizePreference(result, ds.getPercentile(50));
+		Discretizer.addPreferenceDisc(result, ds);
 		
 		// generate arff
 		new WriterArff().write(arffPath, result);
@@ -137,17 +150,6 @@ public class MainGameFeatures {
 			return 1.0;
 		}
 		return value.doubleValue();
-	}
-
-	private void discretizePreference(List<Map<String, Object>> result, double median) {
-		logger.info("Median: " + median);
-		
-		for (Map<String, Object> entry : result) {
-			entry.put("preferenceDisc", "B");
-			if (((Number)entry.get("preference")).doubleValue() > median) {
-				entry.put("preferenceDisc", "A");
-			}
-		}
 	}
 
 }

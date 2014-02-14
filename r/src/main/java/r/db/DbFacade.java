@@ -22,8 +22,8 @@ import features.utils.SessionManager;
 
 public class DbFacade {
 	private static final int FELDER_INT_HI = -11;
-	private static final int FELDER_INT_LO = -5;
-	private static final int FELDER_SEN_LO = 5;
+	private static final int FELDER_INT_LO = -1;
+	private static final int FELDER_SEN_LO = 1;
 	private static final int FELDER_SEN_HI = 11;
 
 
@@ -86,7 +86,10 @@ public class DbFacade {
 		.add(felderRestriction())
 		.add(usergroupRestriction())
 		.setProjection(Projections.projectionList()
-				.add(Projections.groupProperty("u.perception"), "perception")
+				.add(Projections.property("u.perception").as("perception"))
+				.add(Projections.property("u.processing").as("processing"))
+				.add(Projections.property("u.input").as("input"))
+				.add(Projections.property("u.understanding").as("understanding"))
 				.add(Projections.groupProperty("u.username"), "username")
 				.add(Projections.groupProperty("g.id"), "game")
 		)
@@ -187,21 +190,24 @@ public class DbFacade {
 				"SELECT u.username AS username, " +
 				"p.id_game AS game, " +
                 "u.perception AS perception, " +
+                "u.processing AS processing, " +
+                "u.input AS input, " +
+                "u.understanding AS understanding, " +
                 "CAST(pr.value AS UNSIGNED) AS preference, " +
-                "count(*) AS timesPlayed, " +
-                "max(p.level) AS level, " +
-                "max(p.`time`) AS time, " +
-                "sum(p.correctAnswers) AS correctAnswers, " +
-                "sum(p.incorrectAnswers) AS incorrectAnswers, " +
-                "sum(p.movs) AS movs, " +
-                "sum(p.movs_in) AS movs_in, " +
-                "sum(p.movs_out) AS movs_out, " +
-                "sum(p.help) AS help, " +
-                "sum(p.timeout) AS timeout " +
+                "count(*) AS v_timesPlayed, " +
+                "max(p.level) AS v_level, " +
+                "max(p.`time`) AS v_time, " +
+                "sum(p.correctAnswers) AS v_correctAnswers, " +
+                "sum(p.incorrectAnswers) AS v_incorrectAnswers, " +
+                "sum(p.movs) AS v_movs, " +
+                "sum(p.movs_in) AS v_movs_in, " +
+                "sum(p.movs_out) AS v_movs_out, " +
+                "sum(p.help) AS v_help, " +
+                "sum(p.timeout) AS v_timeout " +
           "FROM profilegame p " +
           "INNER JOIN user u " +
           "ON u.username = p.username " +
-          "INNER JOIN test_preference pr " +
+          "INNER JOIN test_preference_mod2 pr " +
           "ON u.username = pr.username AND p.id_game = pr.id_game " +
           "GROUP BY p.username, p.id_game " +
           "ORDER BY p.username, p.id_game")
