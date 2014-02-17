@@ -13,11 +13,11 @@ import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import features.model.Feature;
 import features.model.Game;
 import features.model.ProfileGame;
 import features.model.TestGameFeature;
 import features.model.TestPreference;
+import features.model.User;
 import features.utils.SessionManager;
 
 public class DbFacade {
@@ -100,6 +100,20 @@ public class DbFacade {
 		return crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).list();
 	}
 
+	@SuppressWarnings("unchecked")
+	public Map<String, Integer> getLS(String username) {
+		Criteria crit = SessionManager.getSession().createCriteria(User.class)
+				.add(Restrictions.eq("username", username))
+				.setProjection(Projections.projectionList()
+				.add(Projections.property("perception").as("perception"))
+				.add(Projections.property("processing").as("processing"))
+				.add(Projections.property("input").as("input"))
+				.add(Projections.property("understanding").as("understanding"))
+		);
+		
+		return (Map<String, Integer>) crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).uniqueResult();
+	}
+
 	/***********************************************************
 	 * PROFILE
 	 ************************************************************/
@@ -128,26 +142,16 @@ public class DbFacade {
 	/***********************************************************
 	 * GAME FEATURES
 	 ************************************************************/
-	@SuppressWarnings("unchecked")
-	public Map<String,Double> getGameFeaturesByJuan(String gameId) {
-		List<Feature> features = SessionManager.getSession().createCriteria(Feature.class).list();
-		Game game = (Game) SessionManager.getSession().createCriteria(Game.class)
-				.add(Restrictions.eq("id", gameId))
-				.uniqueResult();
-		
-		Map<String,Double> gameFeatures = new LinkedHashMap<String, Double>(); 
-		for (Feature feature : features) {
-			gameFeatures.put(feature.getCode(), 0d);
-			if (game.getFeatures().contains(feature)) {
-				gameFeatures.put(feature.getCode(), 1d);
-			}
-		}
-		
-		return gameFeatures;
-	}
-	
+	/**
+	 * Retorna los valores de features de un juego.
+	 * Los valores se calculan como el promedio de todos los valores 
+	 * ingresados por los estudiantes (segun la encuesta) para una feature para un juego 
+	 * 
+	 * @param gameId Id del juego del cual se desean los valores de feature
+	 * @return
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Map<String,Double> getGameFeaturesByStudents(String gameId) {
+	public Map<String,Double> getGameFeaturesByGame(String gameId) {
 		Criteria crit = SessionManager.getSession().createCriteria(TestGameFeature.class)
 		.createAlias("feature", "f")
 		.add(Restrictions.eq("game.id", gameId))
@@ -155,6 +159,36 @@ public class DbFacade {
 				.add(Projections.property("f.code").as("code"))
 				.add(Projections.avg("value"), "value")
 				.add(Projections.groupProperty("f.id"))
+		)
+		.addOrder(Order.asc("f.id"));
+		
+		List<HashMap> result = crit.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP).list();
+		
+		Map<String, Double> finalRes = new LinkedHashMap<String, Double>(); 
+		for (HashMap map : result) {
+			finalRes.put(map.get("code").toString(), Double.valueOf(map.get("value").toString()));
+		}
+		
+		return finalRes;
+	}
+	
+	/**
+	 * Retorna los valores de feature ingresado por un estudiante para un juego dado (segun la encuesta) 
+	 * 
+	 * @param gameId Id del juego del cual se desean los valores de feature
+	 * @param username Nombre del estudiante que respondio la encuesta de features
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Map<String,Double> getGameFeaturesByGameAndStudent(String gameId, String username) {
+		Criteria crit = SessionManager.getSession().createCriteria(TestGameFeature.class)
+		.createAlias("feature", "f")
+		.createAlias("user", "u")
+		.add(Restrictions.eq("game.id", gameId))
+		.add(Restrictions.eq("u.username", username))
+		.setProjection(Projections.projectionList()
+				.add(Projections.property("f.code").as("code"))
+				.add(Projections.property("value"), "value")
 		)
 		.addOrder(Order.asc("f.id"));
 		
@@ -219,7 +253,7 @@ public class DbFacade {
 	 * UTILS
 	 ************************************************************/
 	@SuppressWarnings("unchecked")
-	public List<String> getGames() {
+	public List<Game> getGames() {
 		return SessionManager.getSession().createCriteria(Game.class)
 		.list();
 	}

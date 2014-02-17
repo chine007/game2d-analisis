@@ -32,14 +32,18 @@ public class Discretizer {
 		}
 	}
 	
-	public static String discretizeFelderDimension(Integer value) {
-		if (value > 3) {
+	public static String felder(Integer value) {
+		if (isBetween(value, 5, 11)) {
 			return "Positivo";
-		} else if (value > -5) {
+		} else if (isBetween(value, -3, 3)) {
 			return "Neutro";
 		} else {
 			return "Negativo";
 		}
+	}
+	
+	private static boolean isBetween(int value, int low, int high) {
+		return value >= low && value <= high;
 	}
 	
 }

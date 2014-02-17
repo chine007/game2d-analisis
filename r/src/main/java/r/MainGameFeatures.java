@@ -35,7 +35,7 @@ public class MainGameFeatures {
 		new MainGameFeatures().generateArff("c:/Temp/j-features.arff");
 	}
 	
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	public void generateArff(String arffPath) {
 		logger.info("================== Starting Java code ==================");
 		SessionManager.beginTransaction();
@@ -46,6 +46,7 @@ public class MainGameFeatures {
 		// get perception - user - game
 		List<Map<?, ?>> data = db.getData();
 		
+		int row = 1;
 		DescriptiveStatistics ds = new DescriptiveStatistics();
 		for (Map<?, ?> record : data) {
 			String game = (String) record.get("game");
@@ -67,24 +68,33 @@ public class MainGameFeatures {
 			ds.addValue(preference);
 			
 			// get games features
-			Map<String,Double> gameFeatures = (Map<String, Double>) cacheGameFeatures.get(game);
-			if (gameFeatures == null) {
-	//			Map<String,Double> gameFeatures = db.getGameFeaturesByJuan(game);
-				gameFeatures = db.getGameFeaturesByStudents(game);
-				cacheGameFeatures.put(game, gameFeatures);
+			Map<String,Double> gameFeatures = db.getGameFeaturesByGameAndStudent(game, username);
+			if (gameFeatures.isEmpty()) {
+				continue;
 			}
+			
+//			Map<String,Double> gameFeatures = (Map<String, Double>) cacheGameFeatures.get(game);
+//			if (gameFeatures == null) {
+//				gameFeatures = db.getGameFeaturesByGame(game);
+//				cacheGameFeatures.put(game, gameFeatures);
+//			}
 			
 			// add record
 			Map<String, Object> entry = new LinkedHashMap<>();
 			// columns to filter
+//			entry.put("row", row++);
 			entry.put("game", game);
 			entry.put("username", username);
 			entry.put("preference", preference);
 			// columns learning styles 
-			entry.put("ls_perception", Discretizer.discretizeFelderDimension(perception));
-			entry.put("ls_processing", Discretizer.discretizeFelderDimension(processing));
-			entry.put("ls_input", Discretizer.discretizeFelderDimension(input));
-			entry.put("ls_understanding", Discretizer.discretizeFelderDimension(understanding));
+//			entry.put("ls_perception", Discretizer.felder(perception));
+//			entry.put("ls_processing", Discretizer.felder(processing));
+//			entry.put("ls_input", Discretizer.felder(input));
+//			entry.put("ls_understanding", Discretizer.felder(understanding));
+			entry.put("ls_perception", perception);
+			entry.put("ls_processing", processing);
+			entry.put("ls_input", input);
+			entry.put("ls_understanding", understanding);
 			// columns features
 			for (Entry<?, ?> feat : gameFeatures.entrySet()) {
 				entry.put("f_" + feat.getKey(), feat.getValue());
