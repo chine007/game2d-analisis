@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.log4j.Logger;
@@ -68,16 +69,16 @@ public class MainGameFeatures {
 			ds.addValue(preference);
 			
 			// get games features
-			Map<String,Double> gameFeatures = db.getGameFeaturesByGameAndStudent(game, username);
-			if (gameFeatures.isEmpty()) {
-				continue;
-			}
-			
-//			Map<String,Double> gameFeatures = (Map<String, Double>) cacheGameFeatures.get(game);
-//			if (gameFeatures == null) {
-//				gameFeatures = db.getGameFeaturesByGame(game);
-//				cacheGameFeatures.put(game, gameFeatures);
+//			Map<String,Double> gameFeatures = db.getGameFeaturesByGameAndStudent(game, username);
+//			if (gameFeatures.isEmpty()) {
+//				continue;
 //			}
+			
+			Map<String,Double> gameFeatures = (Map<String, Double>) cacheGameFeatures.get(game);
+			if (gameFeatures == null) {
+				gameFeatures = db.getGameFeaturesByGame(game);
+				cacheGameFeatures.put(game, gameFeatures);
+			}
 			
 			// add record
 			Map<String, Object> entry = new LinkedHashMap<>();
