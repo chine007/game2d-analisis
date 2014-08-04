@@ -33,7 +33,7 @@ public class DataLoader {
 	}
 
 	/**
-	 * Carga los datos del usuario
+	 * Carga los datos del usuario (segun las variables definidas en la red de Bayes del capitulo 3 de la tesis)  
 	 * 
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public class DataLoader {
 			// Obtiene los nombres de todos los jugadores que jugaron
 			List<String> users = db.getAllUsersPlayed();
 			
-			// Obtiene la dimension de Felde a analizar
+			// Obtiene la dimension de Felder a analizar
 			String felderDimension = UtilsConfig.get().getValue("felder.dimension");
 			
 			for (String username : users) {
@@ -54,15 +54,13 @@ public class DataLoader {
 				// Datos del usuario
 				GenieData data = new GenieData(username, felderDimensionValue); 
 				
-				// S2_ABSTRACT_LEVELS_WON
-				data.put(N2_ABSTRACT_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_ABSTRACT, OPER_COUNT, RESULT_LEVEL_WON));
-				data.put(N2_ABSTRACT_MAX_LEVEL, getPropertyValue(username, "level", CATEGORY_ABSTRACT, OPER_MAX, RESULT_LEVEL_WON));
-				data.put(N2_ABSTRACT_MEAN_TIME_PLAYED, getPropertyValue(username, "time", CATEGORY_ABSTRACT, OPER_AVG, ""));
-
-				// S2_CONCRETE_LEVELS_WON
-				data.put(N2_CONCRETE_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_CONCRETE, OPER_COUNT, RESULT_LEVEL_WON));
-				data.put(N2_CONCRETE_TIME_PLAYED, getPropertyValue(username, "time", CATEGORY_CONCRETE, OPER_SUM, ""));
-				data.put(N2_CONCRETE_TURNS_PLAYED, getPropertyValue(username, "*", CATEGORY_CONCRETE, OPER_COUNT, ""));
+				// S2_PUZZLE_LEVELS_WON
+				data.put(N2_PUZZLE_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_PUZZLE, OPER_COUNT, RESULT_LEVEL_WON));
+				data.put(N2_PUZZLE_MAX_LEVEL, getPropertyValue(username, "level", CATEGORY_PUZZLE, OPER_MAX, RESULT_LEVEL_WON));
+				data.put(N2_PUZZLE_MOVS, getPropertyValue(username, "movs", CATEGORY_PUZZLE, OPER_SUM, ""));
+//				data.put(N2_PUZZLE_HELP, getPropertyValue(username, "help", CATEGORY_PUZZLE, OPER_SUM, ""));
+//				data.put(N2_PUZZLE_TIMEOUT, getPropertyValue(username, "timeout", CATEGORY_PUZZLE, OPER_SUM, ""));
+				data.put(N2_PUZZLE_LEVELS_LOST, getPropertyValue(username, "*", CATEGORY_PUZZLE, OPER_COUNT, RESULT_LEVEL_LOST));
 				
 				// S2_MEMORY_LEVELS_WON
 				data.put(N2_MEMORY_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_MEMORY, OPER_COUNT, RESULT_LEVEL_WON));
@@ -72,14 +70,16 @@ public class DataLoader {
 				data.put(N2_MEMORY_TIME_PLAYED, getPropertyValue(username, "time", CATEGORY_MEMORY, OPER_SUM, ""));
 				data.put(N2_MEMORY_TURNS_PLAYED, getPropertyValue(username, "*", CATEGORY_MEMORY, OPER_COUNT, ""));
 				
-				// S2_PUZZLE_LEVELS_WON
-				data.put(N2_PUZZLE_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_PUZZLE, OPER_COUNT, RESULT_LEVEL_WON));
-				data.put(N2_PUZZLE_MAX_LEVEL, getPropertyValue(username, "level", CATEGORY_PUZZLE, OPER_MAX, RESULT_LEVEL_WON));
-				data.put(N2_PUZZLE_MOVS, getPropertyValue(username, "movs", CATEGORY_PUZZLE, OPER_SUM, ""));
-//				data.put(N2_PUZZLE_HELP, getPropertyValue(username, "help", CATEGORY_PUZZLE, OPER_SUM, ""));
-//				data.put(N2_PUZZLE_TIMEOUT, getPropertyValue(username, "timeout", CATEGORY_PUZZLE, OPER_SUM, ""));
-				data.put(N2_PUZZLE_LEVELS_LOST, getPropertyValue(username, "*", CATEGORY_PUZZLE, OPER_COUNT, RESULT_LEVEL_LOST));
+				// S2_CONCRETE_LEVELS_WON
+				data.put(N2_CONCRETE_TURNS_PLAYED, getPropertyValue(username, "*", CATEGORY_CONCRETE, OPER_COUNT, ""));
+				data.put(N2_CONCRETE_TIME_PLAYED, getPropertyValue(username, "time", CATEGORY_CONCRETE, OPER_SUM, ""));
+				data.put(N2_CONCRETE_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_CONCRETE, OPER_COUNT, RESULT_LEVEL_WON));
 				
+				// S2_ABSTRACT_LEVELS_WON
+				data.put(N2_ABSTRACT_LEVELS_WON, getPropertyValue(username, "*", CATEGORY_ABSTRACT, OPER_COUNT, RESULT_LEVEL_WON));
+				data.put(N2_ABSTRACT_MAX_LEVEL, getPropertyValue(username, "level", CATEGORY_ABSTRACT, OPER_MAX, RESULT_LEVEL_WON));
+				data.put(N2_ABSTRACT_MEAN_TIME_PLAYED, getPropertyValue(username, "time", CATEGORY_ABSTRACT, OPER_AVG, ""));
+
 				result.add(data);
 				logger.debug(data);
 			}
