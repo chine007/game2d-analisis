@@ -22,10 +22,10 @@ public abstract class AbstractGenieUtils {
 	 * el registro pasado como parametro
 	 * 
 	 * @param dataSet Data set original
-	 * @param recordDiscard Registro a descartar
+	 * @param recordToDiscard Registro a descartar
 	 * @return
 	 */
-	public static DataSet getTrainingSet(DataSet dataSet, int recordDiscard) {
+	public static DataSet getTrainingSet(DataSet dataSet, int recordToDiscard) {
 		DataSet result = new DataSet();
 		
 		// Crea el header
@@ -36,12 +36,12 @@ public abstract class AbstractGenieUtils {
 		
 		// Crea el cuerpo
 		int recordIndex = 0;
-		for (int records = 0; records < dataSet.getRecordCount(); records++) {
-			if (records != recordDiscard) {
+		for (int record = 0; record < dataSet.getRecordCount(); record++) {
+			if (record != recordToDiscard) {
 				result.addEmptyRecord();
 				
 				for (int variable = 0; variable < dataSet.getVariableCount(); variable++) {
-					result.setInt(variable, recordIndex, dataSet.getInt(variable, records));
+					result.setInt(variable, recordIndex, dataSet.getInt(variable, record));
 				}
 				
 				recordIndex++;

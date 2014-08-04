@@ -21,7 +21,7 @@ public class Game2DAnalisis {
 	/**
 	 * Metodo Main
 	 * 
-	 * Ejecutarlo usando como VM arguments: -Djava.library.path=..\BayesGenie\lib 
+	 * Ejecutarlo usando como VM arguments: -Djava.library.path=..\BayesGenie\lib
 	 * 
 	 * @param args
 	 * @throws Exception
@@ -46,7 +46,7 @@ public class Game2DAnalisis {
 		net.writeFile(IGenieConstants.FILE_BAYES_NET);
 		
 		// Cross validation
-		genie.crossValidate(net, dataSet);
+		genie.crossValidate(IGenieConstants.FILE_BAYES_NET, dataSet);
 	}
 	
 }

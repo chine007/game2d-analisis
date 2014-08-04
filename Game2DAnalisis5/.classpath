@@ -10,7 +10,6 @@
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.16-bin.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BayesGenie"/>
 	<classpathentry kind="lib" path="/BayesGenie/lib/smile.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Game2DAnalisis4"/>
 	<classpathentry kind="lib" path="/Game2DAnalisis4/bin"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>

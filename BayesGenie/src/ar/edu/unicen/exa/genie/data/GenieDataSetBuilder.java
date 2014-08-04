@@ -25,13 +25,13 @@ public class GenieDataSetBuilder {
 	public DataSet build(List<GenieData> data) {
 		DataSet dataSet = new DataSet();
 		
-		// Crea los headers
+		// Crea los headers (las variables del dataset)
 		dataSet.addIntVariable(N0_ROOT, IGenieConstants.DATASET_MISSING_VALUE);
 		for (String key : data.get(0).getProperties().keySet()) {
 			dataSet.addIntVariable(key, IGenieConstants.DATASET_MISSING_VALUE);
 		}
 		
-		// Crea el body
+		// Crea el body (los valores de las variables para cada usuario)
 		int recordIdx = 0;
 		for (GenieData dat : data) {
 			int propIdx = 0;

@@ -43,12 +43,13 @@ public class Game2DAnalisis54 {
 		dataSet.writeFile(IGenieConstants.FILE_DATASET_DISCRETIZED);
 		
 		// Construye la red 
+		String networkFile = "output54/tlt.xdsl";
 		new File("output54").mkdir();
 		Network net = buildNetwork();
 		net.writeFile("output54/tlt.xdsl");
 		
 		// Cross validation
-		genie.crossValidate(net, dataSet);
+		genie.crossValidate(networkFile, dataSet);
 	}
 
 	private static List<GenieData> loadData() throws Exception {

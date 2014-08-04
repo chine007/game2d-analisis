@@ -83,19 +83,18 @@ public class GenieFacade {
 	 * 
 	 * @param net Red de Bayes
 	 * @param dataSet Data set
-	 * @return
 	 */
-	public Network learn(Network net, DataSet dataSet) {
-		return new GenieNetworkEMLearning().learn(net, dataSet);
+	public void learn(Network net, DataSet dataSet) {
+		new GenieNetworkEMLearning().learn(net, dataSet);
 	}
 
 	/**
 	 * Realiza el cross validation
 	 * 
-	 * @param net Red de Bayes
+	 * @param networkFile Archivo de la red de Bayes
 	 * @param dataSet Data set
 	 */
-	public void crossValidate(Network net, DataSet dataSet) {
-		new GenieNetworkCrossValidation().crossValidate(net, dataSet);
+	public void crossValidate(String networkFile, DataSet dataSet) {
+		new GenieNetworkCrossValidation().crossValidate(networkFile, dataSet);
 	}
 }

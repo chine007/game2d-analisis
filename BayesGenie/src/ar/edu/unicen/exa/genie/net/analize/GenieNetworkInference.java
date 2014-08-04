@@ -25,19 +25,19 @@ public class GenieNetworkInference {
 	 * Realiza inferencia
 	 * 
 	 * @param net Red de Bayes
-	 * @param evidences Evidencias
+	 * @param evidence Evidencias
 	 */
-	public boolean inference(Network net, DataSet evidences) {
-		// Obtiene el valor real
-		Integer realValue = evidences.getInt(0, 0);
+	public boolean inference(Network net, DataSet evidence) {
+		// Obtiene el valor real de la clase (perception)
+		Integer realValue = evidence.getInt(0, 0);
 
 		// Obtiene el matching nroColumnaDataSet - nroNodeRedBayes
-		DataMatch[] match = evidences.matchNetwork(net);
+		DataMatch[] match = evidence.matchNetwork(net);
 		
 		// Introduce la evidencia
-		for (int i = 1; i < evidences.getVariableCount(); i++) {
+		for (int i = 1; i < evidence.getVariableCount(); i++) {
 			int nodeHandle = match[i].node;
-			int outcomeIndex = evidences.getInt(i, 0);
+			int outcomeIndex = evidence.getInt(i, 0);
 			
 			if (!IGenieConstants.DATASET_MISSING_VALUE.equals(outcomeIndex)) {
 				net.setEvidence(nodeHandle, outcomeIndex);
@@ -83,13 +83,13 @@ public class GenieNetworkInference {
 	 * @return
 	 */
 	private boolean doInference(Network net, int realValue) {
-		// Updating the network:
+		// Actualiza las tablas de la red
 		net.updateBeliefs();
 
-		// Getting the handle of the node "perception":
+		// Obtiene el nodo clase ("perception")
 		int handle = net.getNode(IGenieConstants.N0_ROOT);
 
-		// Getting the value of the probability:
+		// Obtiene el valor de mayor probabilidad para la clase
 		double[] values = net.getNodeValue(handle);
 		int maxIdx = 0;
 		for (int i = 1; i < values.length; i++) {
@@ -103,7 +103,7 @@ public class GenieNetworkInference {
 		IGenieConstants.FELDER_VALUES[maxIdx], IGenieConstants.FELDER_VALUES[realValue], res));
 		logger.info(Arrays.toString(values));
 		
-		// Clear evidence
+		// Limpiar la evidencia
 		net.clearAllEvidence();
 		
 		return res;

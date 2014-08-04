@@ -20,24 +20,12 @@ public class GenieNetworkCrossValidation {
 
 	
 	/**
-	 * Realiza inferencia
+	 * Realiza el cross validation usando leave-one-out
 	 * 
 	 * @param networkFile Archivo de la red de Bayes
 	 * @param dataSet
 	 */
 	public void crossValidate(String networkFile, DataSet dataSet) {
-		Network net = new Network();
-		net.readFile(networkFile);
-		crossValidate(net, dataSet);
-	}
-
-	/**
-	 * Realiza inferencia
-	 * 
-	 * @param net Red de Bayes
-	 * @param dataSet
-	 */
-	public void crossValidate(Network net, DataSet dataSet) {
 		int counter = 0;
 		int recordNumber = dataSet.getRecordCount();
 		
@@ -58,11 +46,11 @@ public class GenieNetworkCrossValidation {
 			train.writeFile(String.format(IGenieConstants.FILE_DATASET_MASK, username, "train", i, "dat"));
 			
 			// Aplica EM Learning
-			Network newNet = new GenieNetworkEMLearning().learn(net, train);
-			newNet.writeFile(String.format(IGenieConstants.FILE_DATASET_MASK, username, "net", i, "xdsl"));
+			Network net = new GenieNetworkEMLearning().learn(networkFile, train);
+			net.writeFile(String.format(IGenieConstants.FILE_DATASET_MASK, username, "net", i, "xdsl"));
 			
 			// Realiza inferencia
-			if (new GenieNetworkInference().inference(newNet, test)) {
+			if (new GenieNetworkInference().inference(net, test)) {
 				counter++;
 			}
 		}

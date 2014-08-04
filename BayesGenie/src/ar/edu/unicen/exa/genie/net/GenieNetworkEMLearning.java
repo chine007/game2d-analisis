@@ -25,7 +25,8 @@ public class GenieNetworkEMLearning {
 	public Network learn(String networkFile, DataSet dataSet) {
 		Network net = new Network();
 		net.readFile(networkFile);
-		return learn(net, dataSet);
+		learn(net, dataSet);
+		return net;
 	}
 
 	/**
@@ -33,17 +34,14 @@ public class GenieNetworkEMLearning {
 	 * 
 	 * @param net Red de Bayes
 	 * @param dataSet Data set
-	 * @return Red con los parametros aprendidos
 	 */
-	public Network learn(Network net, DataSet dataSet) {
+	public void learn(Network net, DataSet dataSet) {
 		EM em = new EM();
-		em.setRandomizeParameters(true);
-		em.setRelevance(false);
+//		em.setRandomizeParameters(true);
+//		em.setRelevance(false);
 		
 		DataMatch[] match = dataSet.matchNetwork(net);
 		em.learn(dataSet, net, match);
-		
-		return net;
 	}
 	
 }
