@@ -51,6 +51,7 @@ public interface IGenieConstants {
 	String FILE_DATASET 								= FILE_OUTPUT_DIR + "/data.dat";
 	String FILE_DATASET_DISCRETIZED 					= FILE_OUTPUT_DIR + "/dataDis.dat";
 	String FILE_BAYES_NET 								= FILE_OUTPUT_DIR + "/net.xdsl";
+	String FILE_VALIDATE 								= FILE_OUTPUT_DIR + "/validate.txt";
 
 	/** Missing value */
 	Integer DATASET_MISSING_VALUE 						= Integer.MAX_VALUE;

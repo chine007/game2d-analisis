@@ -95,6 +95,7 @@ public class GenieFacade {
 	 * @param dataSet Data set
 	 */
 	public void crossValidate(String networkFile, DataSet dataSet) {
-		new GenieNetworkCrossValidation().crossValidate(networkFile, dataSet);
+		new GenieNetworkCrossValidation().crossValidateGenie(networkFile, dataSet);
 	}
+	
 }

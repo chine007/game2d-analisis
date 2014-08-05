@@ -1,9 +1,14 @@
 package ar.edu.unicen.exa.genie.net.analize;
 
+import java.util.Arrays;
+
 import org.apache.log4j.Logger;
 
 import smile.Network;
+import smile.learning.DataMatch;
 import smile.learning.DataSet;
+import smile.learning.EM;
+import smile.learning.Validator;
 import ar.edu.unicen.exa.genie.net.GenieNetworkEMLearning;
 import ar.edu.unicen.exa.genie.utils.AbstractGenieUtils;
 import ar.edu.unicen.exa.genie.utils.IGenieConstants;
@@ -25,7 +30,7 @@ public class GenieNetworkCrossValidation {
 	 * @param networkFile Archivo de la red de Bayes
 	 * @param dataSet
 	 */
-	public void crossValidate(String networkFile, DataSet dataSet) {
+	public void crossValidateJuan(String networkFile, DataSet dataSet) {
 		int counter = 0;
 		int recordNumber = dataSet.getRecordCount();
 		
@@ -57,4 +62,46 @@ public class GenieNetworkCrossValidation {
 		
 		logger.info(String.format("Precision: %d/%d = %2.2f", counter, recordNumber, counter/(float)recordNumber));
 	}
+	
+	/**
+	 * Realiza el cross validation usando leave-one-out
+	 * 
+	 * @param networkFile Archivo de la red de Bayes
+	 * @param dataSet
+	 */
+	public void crossValidateGenie(String networkFile, DataSet dataSet) {
+		// Lee la red
+		Network net = new Network();
+		net.readFile(networkFile);
+		
+		DataMatch[] matching = dataSet.matchNetwork(net);
+		
+		// Crea el validator 
+		Validator val = new Validator(net, dataSet, matching);
+		val.addClassNode(IGenieConstants.N0_ROOT);
+
+		// Crea el algoritmo de aprendizaje de parametros 
+		EM em = new EM();
+		em.setRandomizeParameters(true);
+		em.setUniformizeParameters(false);
+		
+		// Setea la validacion
+		val.leaveOneOut(em);
+//		val.kFold(em, 10);
+		
+		// Graba el resultado
+		val.getResultDataSet().writeFile(IGenieConstants.FILE_VALIDATE);
+		
+		// Imprime la matriz de confusion
+		int[][] cm = val.getConfusionMatrix(IGenieConstants.N0_ROOT);
+		for (int[] is : cm) {
+			System.out.println(Arrays.toString(is));
+		}
+		
+		// Imprime el accuracy
+		for (String felderValue : IGenieConstants.FELDER_VALUES) {
+			System.out.println("Accuracy " + felderValue + " : " + val.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
+		}
+	}
+	
 }
