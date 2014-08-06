@@ -102,7 +102,7 @@ public class GenieNetworkCrossValidation {
 		
 		// Imprime la precision por tipo de perception
 		for (String felderValue : IGenieConstants.FELDER_VALUES) {
-			System.out.println("Precision " + felderValue + " : " + val.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
+			System.out.println("Precision " + felderValue + ": " + val.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
 		}
 		
 		// Imprime el accuracy

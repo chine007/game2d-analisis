@@ -10,7 +10,7 @@ import ar.edu.unicen.exa.genie.utils.IGenieConstants;
 
 
 /**
- * Clase encargada de crear y manipular el data set
+ * Clase encargada de discretizar el data set
  * 
  * @author Juan
  * 
@@ -26,7 +26,7 @@ public class GenieDataSetDiscretizer {
 	 * @return
 	 */
 	public DataSet discretize(DataSet dataSet) {
-		// variable a inferir (no usar discretizador uniforme porque usa valores limites de la variable a discretizar segun el dataset)
+		// variable a inferir (no usar discretizador uniforme porque usa los valores limites de la variable a discretizar segun el dataset)
 		discretize(dataSet, 0, IGenieConstants.FELDER_INTERVALS);
 
 		// variables observables

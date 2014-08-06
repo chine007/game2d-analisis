@@ -9,5 +9,5 @@ ON			ggc.id_gamecategory = gc.id
 INNER JOIN	user u
 ON			u.username = pr.username
 WHERE		gc.code <> 'other' 
-			AND u.userGroup like 'progexpl2013'
+--			AND u.userGroup like 'progexpl2013'
 ORDER BY pr.username
