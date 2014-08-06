@@ -45,7 +45,7 @@ public class Game2DAnalisis {
 		Network net = genie.builNetwork();
 		net.writeFile(IGenieConstants.FILE_BAYES_NET);
 		
-		// Cross validation
+		// Cross validation (la ejecucion es NO determinista ya que el aprendizaje de los parametros de la red agrega randomizacion)
 		genie.crossValidate(IGenieConstants.FILE_BAYES_NET, dataSet);
 	}
 	

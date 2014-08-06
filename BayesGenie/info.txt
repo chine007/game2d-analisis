@@ -1,0 +1,17 @@
+--------------------------------------------------------
+					Nodos
+--------------------------------------------------------
+1. nodeId: nombre del nodo. Por ejemplo: perception, innovation, abstract_levels_won (ver clases GenieNetworkBuilder y IGenieConstants) 
+
+2. nodeHandle: indice del nodo de la red segun el orden en el que se fueron agregando. Por ejemplo, el nodo raiz tiene indice 0, el nodo N1_INNOVATION
+tiene indice 1, etc (ver clase GenieNetworkBuilder)
+
+
+--------------------------------------------------------
+			Outcome (valores del nodo)
+--------------------------------------------------------
+1. outcomeId: nombre de alguno de los valores que puede tomar el nodo. Por ejemplo: para el nodo perception los posibles outcomeId son intuitive, neutral, 
+sensitive; para los nodos del nivel 1 los valores son los definidos en IGenieConstants.LEVEL1_NODES_VALUES (low, medium, high)
+
+2. outcomeIndex: indice de alguno de los valores que puede tomar el nodo. Por ejemplo: para el nodo perception los posibles outcomeIndex son 0 para intuitive, 
+1 para neutral, y 2 para sensitive.

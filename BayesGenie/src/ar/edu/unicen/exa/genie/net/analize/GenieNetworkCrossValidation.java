@@ -73,7 +73,9 @@ public class GenieNetworkCrossValidation {
 		// Lee la red
 		Network net = new Network();
 		net.readFile(networkFile);
+//		net.setBayesianAlgorithm(Network.BayesianAlgorithmType.Lauritzen);
 		
+		// Obtiene el matching nroColumnaDataSet - nroNodeRedBayes
 		DataMatch[] matching = dataSet.matchNetwork(net);
 		
 		// Crea el validator 
@@ -86,11 +88,11 @@ public class GenieNetworkCrossValidation {
 		em.setUniformizeParameters(false);
 		
 		// Setea la validacion
-		val.leaveOneOut(em);
-//		val.kFold(em, 10);
+//		val.leaveOneOut(em);
+		val.kFold(em, 10);
 		
 		// Graba el resultado
-		val.getResultDataSet().writeFile(IGenieConstants.FILE_VALIDATE);
+		val.getResultDataSet().writeFile(IGenieConstants.FILE_CROSS_VALIDATE);
 		
 		// Imprime la matriz de confusion
 		int[][] cm = val.getConfusionMatrix(IGenieConstants.N0_ROOT);
@@ -98,10 +100,17 @@ public class GenieNetworkCrossValidation {
 			System.out.println(Arrays.toString(is));
 		}
 		
-		// Imprime el accuracy
+		// Imprime la precision por tipo de perception
 		for (String felderValue : IGenieConstants.FELDER_VALUES) {
-			System.out.println("Accuracy " + felderValue + " : " + val.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
+			System.out.println("Precision " + felderValue + " : " + val.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
 		}
+		
+		// Imprime el accuracy
+		int sum = 0;
+		for (int i = 0; i < cm.length; i++) {
+			sum += cm[i][i];
+		}
+		System.out.println("Accuracy " + sum/(float)dataSet.getRecordCount());
 	}
 	
 }
