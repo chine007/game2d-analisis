@@ -36,10 +36,10 @@ public interface IGenieConstants {
 	String N2_ABSTRACT_MEAN_TIME_PLAYED 				= "abstract_mean_time_played";
 
 	/** Valores de los nodos de la red */
-	String[] LEVEL2_NODES_VALUES						= {"low", "medium", "high"};
+	String[] LEVEL2_NODES_VALUES						= {"l2_low", "l2_medium", "l2_high"};
 
 	/** Valores de los nodos de la red */
-	String[] LEVEL1_NODES_VALUES						= {"low", "medium", "high"};
+	String[] LEVEL1_NODES_VALUES						= {"l1_low", "l1_medium", "l1_high"};
 	
 	/** Valores del nodo raiz */
 	String[] FELDER_VALUES 								= {"intuitive", "neutral", "sensitive"};
