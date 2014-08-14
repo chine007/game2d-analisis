@@ -31,7 +31,7 @@ public class GenieDataSetDiscretizer {
 
 		// variables observables
 		for (int i = 1; i < dataSet.getVariableCount(); i++) {
-			discretize(dataSet, DataSet.DiscretizationAlgorithmType.UniformWidth, i, IGenieConstants.LEVEL2_NODES_VALUES.length);
+			discretize(dataSet, DataSet.DiscretizationAlgorithmType.UniformCount, i, IGenieConstants.LEVEL2_NODES_VALUES.length);
 		}
 		
 		return dataSet;

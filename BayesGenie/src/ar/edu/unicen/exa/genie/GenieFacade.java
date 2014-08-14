@@ -96,6 +96,7 @@ public class GenieFacade {
 	 */
 	public void crossValidate(String networkFile, DataSet dataSet) {
 		new GenieNetworkCrossValidation().crossValidateGenie(networkFile, dataSet);
+//		new GenieNetworkCrossValidation().crossValidateJuan(networkFile, dataSet);
 	}
 	
 }
