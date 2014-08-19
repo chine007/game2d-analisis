@@ -99,8 +99,8 @@ public class GenieNetworkInference {
 		}
 
 		boolean res = realValue == maxIdx;
-		logger.info(String.format("Felder clasificado: %s - Felder real: %s - Resultado: %b", 
-		IGenieConstants.FELDER_VALUES[maxIdx], IGenieConstants.FELDER_VALUES[realValue], res));
+		logger.info(String.format("Felder real: %s - Felder clasificado: %s - Resultado: (-11) %b (+11)", 
+		IGenieConstants.FELDER_VALUES[realValue], IGenieConstants.FELDER_VALUES[maxIdx], res));
 		logger.info(Arrays.toString(values));
 		
 		// Limpiar la evidencia

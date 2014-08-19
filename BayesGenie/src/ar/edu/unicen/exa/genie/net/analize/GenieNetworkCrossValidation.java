@@ -60,7 +60,7 @@ public class GenieNetworkCrossValidation {
 			}
 		}
 		
-		logger.info(String.format("Precision: %d/%d = %2.2f", counter, recordNumber, counter/(float)recordNumber));
+		logger.info(String.format("Accuracy: %d/%d = %2.2f", counter, recordNumber, counter/(float)recordNumber));
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class GenieNetworkCrossValidation {
 		em.setUniformizeParameters(false);
 		
 		// Setea la validacion
-//		val.leaveOneOut(em);
+//		validator.leaveOneOut(em);
 		validator.kFold(em, 10);
 		
 		// Graba el resultado
@@ -98,29 +98,26 @@ public class GenieNetworkCrossValidation {
 		DataSet result = validator.getResultDataSet();		
 		for (int record = 0; record < result.getRecordCount(); record++) {
 			String username = AbstractGenieUtils.getData(record).getUsername();
+			logger.info("================================================");
 			logger.info(String.format("Username: %s", username));
 			
-			// Obitene la clase del usuario
+			// Obtiene la clase del usuario
 			int realValue = result.getInt(0, record);
 			
 			// Obtiene la clase predicha del usuario
-			float probIntuitive = result.getFloat(result.getVariableCount() - 4, record); 
-			float probNeutral = result.getFloat(result.getVariableCount() - 3, record); 
-			float probSensitive = result.getFloat(result.getVariableCount() - 2, record);
-			int valor = result.getInt(result.getVariableCount() - 1, record);
-			System.out.println(valor);
-			
-			double[] values = {probIntuitive, probNeutral, probSensitive};
-			int predictedIndex = 0;
-			for (int i = 1; i < values.length; i++) {
-				if (values[i] > values[predictedIndex]) {
-					predictedIndex = i;
-				}
-			}
+			int predictedValue = result.getInt(result.getVariableCount() - 1, record);
 			
 			// Imprime el resultado
-			logger.info(String.format("Felder clasificado: %s - Felder real: %s", 
-			IGenieConstants.FELDER_VALUES[predictedIndex], IGenieConstants.FELDER_VALUES[realValue]));  
+			logger.info(String.format("Felder real: %s - Felder clasificado: %s", 
+			IGenieConstants.FELDER_VALUES[realValue], IGenieConstants.FELDER_VALUES[predictedValue]));  
+
+			// Obtiene los valores de probabilidad para cada posible valor de la clase
+			int states = IGenieConstants.FELDER_VALUES.length;
+			float[] prob = new float[states];
+			for (int i = 0; i < states; i++) {
+				prob[i] = result.getFloat(result.getVariableCount() - 1 - states + i, record);
+			}
+			logger.info("(-11) " + Arrays.toString(prob) + " (+11)"); 
 		}
 		
 		// Imprime la matriz de confusion
