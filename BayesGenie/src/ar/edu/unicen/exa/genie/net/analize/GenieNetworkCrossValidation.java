@@ -79,8 +79,8 @@ public class GenieNetworkCrossValidation {
 		DataMatch[] matching = dataSet.matchNetwork(net);
 		
 		// Crea el validator 
-		Validator val = new Validator(net, dataSet, matching);
-		val.addClassNode(IGenieConstants.N0_ROOT);
+		Validator validator = new Validator(net, dataSet, matching);
+		validator.addClassNode(IGenieConstants.N0_ROOT);
 
 		// Crea el algoritmo de aprendizaje de parametros 
 		EM em = new EM();
@@ -89,20 +89,49 @@ public class GenieNetworkCrossValidation {
 		
 		// Setea la validacion
 //		val.leaveOneOut(em);
-		val.kFold(em, 10);
+		validator.kFold(em, 10);
 		
 		// Graba el resultado
-		val.getResultDataSet().writeFile(IGenieConstants.FILE_CROSS_VALIDATE);
+		validator.getResultDataSet().writeFile(IGenieConstants.FILE_CROSS_VALIDATE);
+		
+		// Imprime los resultados para cada usuario
+		DataSet result = validator.getResultDataSet();		
+		for (int record = 0; record < result.getRecordCount(); record++) {
+			String username = AbstractGenieUtils.getData(record).getUsername();
+			logger.info(String.format("Username: %s", username));
+			
+			// Obitene la clase del usuario
+			int realValue = result.getInt(0, record);
+			
+			// Obtiene la clase predicha del usuario
+			float probIntuitive = result.getFloat(result.getVariableCount() - 4, record); 
+			float probNeutral = result.getFloat(result.getVariableCount() - 3, record); 
+			float probSensitive = result.getFloat(result.getVariableCount() - 2, record);
+			int valor = result.getInt(result.getVariableCount() - 1, record);
+			System.out.println(valor);
+			
+			double[] values = {probIntuitive, probNeutral, probSensitive};
+			int predictedIndex = 0;
+			for (int i = 1; i < values.length; i++) {
+				if (values[i] > values[predictedIndex]) {
+					predictedIndex = i;
+				}
+			}
+			
+			// Imprime el resultado
+			logger.info(String.format("Felder clasificado: %s - Felder real: %s", 
+			IGenieConstants.FELDER_VALUES[predictedIndex], IGenieConstants.FELDER_VALUES[realValue]));  
+		}
 		
 		// Imprime la matriz de confusion
-		int[][] cm = val.getConfusionMatrix(IGenieConstants.N0_ROOT);
+		int[][] cm = validator.getConfusionMatrix(IGenieConstants.N0_ROOT);
 		for (int[] is : cm) {
 			System.out.println(Arrays.toString(is));
 		}
 		
 		// Imprime la precision por tipo de perception
 		for (String felderValue : IGenieConstants.FELDER_VALUES) {
-			System.out.println("Precision " + felderValue + ": " + val.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
+			System.out.println("Precision " + felderValue + ": " + validator.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
 		}
 		
 		// Imprime el accuracy
@@ -114,3 +143,4 @@ public class GenieNetworkCrossValidation {
 	}
 	
 }
+
