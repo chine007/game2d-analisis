@@ -33,6 +33,9 @@ public class Game2DAnalisis {
 		// Carga los datos
 		List<GenieData> data = new DataLoader().loadData();
 		
+		// Reemplaza los missing values
+		genie.replaceMissingValues(data);
+		
 		// Construye el data set
 		DataSet dataSet = genie.buildDataSet(data);
 		dataSet.writeFile(IGenieConstants.FILE_DATASET);

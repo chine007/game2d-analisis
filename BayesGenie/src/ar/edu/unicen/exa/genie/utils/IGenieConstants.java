@@ -64,7 +64,7 @@ public interface IGenieConstants {
 	
 	/** Valores del nodo raiz */
 	String[] FELDER_VALUES 								= {"intuitive", "neutral", "sensitive"};
-	int[] FELDER_INTERVALS 								= {-5, 3, 11};
+	int[] FELDER_INTERVALS 								= {-11, -3, 5, 12}; // cerrado a izquierda y abierto a derecha. Ejemplo para neutro: -3 <= x < 5 
 
 	/** Nombre de los files a grabar */
 	String FILE_OUTPUT_DIR								= "output";

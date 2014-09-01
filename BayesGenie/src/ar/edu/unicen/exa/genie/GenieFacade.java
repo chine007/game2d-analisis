@@ -9,6 +9,7 @@ import smile.learning.DataSet;
 import ar.edu.unicen.exa.genie.data.GenieData;
 import ar.edu.unicen.exa.genie.data.GenieDataSetBuilder;
 import ar.edu.unicen.exa.genie.data.GenieDataSetDiscretizer;
+import ar.edu.unicen.exa.genie.data.GenieDataSetReplacer;
 import ar.edu.unicen.exa.genie.net.GenieNetworkBuilder;
 import ar.edu.unicen.exa.genie.net.GenieNetworkEMLearning;
 import ar.edu.unicen.exa.genie.net.analize.GenieNetworkCrossValidation;
@@ -38,6 +39,15 @@ public class GenieFacade {
 		}
 	}
 
+	/**
+	 * Reemplaza los missing values
+	 * 
+	 * @param data Datos del data set
+	 */
+	public void replaceMissingValues(List<GenieData> data) {
+		new GenieDataSetReplacer().replaceMissingValues(data);
+	}
+	
 	/**
 	 * Construye el data set
 	 * 
@@ -98,5 +108,5 @@ public class GenieFacade {
 		new GenieNetworkCrossValidation().crossValidateGenie(networkFile, dataSet);
 //		new GenieNetworkCrossValidation().crossValidateJuan(networkFile, dataSet);
 	}
-	
+
 }

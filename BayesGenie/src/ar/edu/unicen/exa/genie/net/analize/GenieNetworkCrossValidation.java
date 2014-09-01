@@ -86,6 +86,7 @@ public class GenieNetworkCrossValidation {
 		EM em = new EM();
 		em.setRandomizeParameters(true);
 		em.setUniformizeParameters(false);
+		em.setRelevance(true);
 		
 		// Setea la validacion
 //		validator.leaveOneOut(em);

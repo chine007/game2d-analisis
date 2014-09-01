@@ -48,16 +48,16 @@ public class GenieDataSetDiscretizer {
 		}
 	}
 
-	private void discretize(DataSet dataSet, int varIdx, int[] upperLimits) {
+	private void discretize(DataSet dataSet, int varIdx, int[] lowerLimits) {
 		for (int i = 0; i < dataSet.getRecordCount(); i++) {
 			// obtiene el valor a discretizar
 			int value = dataSet.getInt(varIdx, i);
 			
 			// discretiza el valor
 			int discValue = 0;
-			for (int j = 0; j < upperLimits.length; j++) {
-				if (value <= upperLimits[j]) {
-					discValue = j;
+			for (int j = 1; j < lowerLimits.length; j++) {
+				if (value < lowerLimits[j]) {
+					discValue = j - 1;
 					break;
 				}
 			}
