@@ -73,6 +73,7 @@ public interface IGenieConstants {
 	String FILE_DATASET_DISCRETIZED 					= FILE_OUTPUT_DIR + "/dataDis.dat";
 	String FILE_BAYES_NET 								= FILE_OUTPUT_DIR + "/net.xdsl";
 	String FILE_CROSS_VALIDATE 							= FILE_OUTPUT_DIR + "/crossValidate.txt";
+	String FILE_ARFF 									= FILE_OUTPUT_DIR + "/data.arff";
 
 	/** Missing value */
 	Integer DATASET_MISSING_VALUE 						= Integer.MAX_VALUE;

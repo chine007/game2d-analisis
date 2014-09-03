@@ -5,6 +5,7 @@ import java.util.List;
 import smile.Network;
 import smile.learning.DataSet;
 import ar.edu.unicen.exa.games.loader.DataLoader;
+import ar.edu.unicen.exa.games.utils.UtilsArffWriter;
 import ar.edu.unicen.exa.genie.GenieFacade;
 import ar.edu.unicen.exa.genie.data.GenieData;
 import ar.edu.unicen.exa.genie.utils.IGenieConstants;
@@ -50,6 +51,9 @@ public class Game2DAnalisis {
 		
 		// Cross validation (la ejecucion es NO determinista ya que el aprendizaje de los parametros de la red agrega randomizacion)
 		genie.crossValidate(IGenieConstants.FILE_BAYES_NET, dataSet);
+		
+		// Genera el ARFF
+		new UtilsArffWriter().write(dataSet);
 	}
 	
 }
