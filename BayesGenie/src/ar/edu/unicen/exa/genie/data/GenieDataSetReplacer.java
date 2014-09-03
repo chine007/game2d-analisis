@@ -1,12 +1,9 @@
 package ar.edu.unicen.exa.genie.data;
 
-import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map.Entry;
 
 import ar.edu.unicen.exa.genie.utils.IGenieConstants;
-
 
 
 /**
@@ -24,12 +21,19 @@ public class GenieDataSetReplacer {
 	 * @param data Datos
 	 */
 	public void replaceMissingValues(List<GenieData> data) {
-		data.stream().forEach(row -> 
-				row.getProperties().keySet()
-					.stream()
-					.filter(key -> row.get(key).intValue() == IGenieConstants.DATASET_MISSING_VALUE)
-					.forEach(key -> row.put(key, getAverage(row.getFelder(), key, data)))
-		);
+		for (GenieData row : data) {
+			int felder = row.getFelder();
+			
+			for (Entry<String, Float> entry : row.getProperties().entrySet()) {
+				String prop = entry.getKey();
+				float value = entry.getValue();
+				
+				if (value == IGenieConstants.DATASET_MISSING_VALUE) {
+					float newValue = getAverage(felder, prop, data);
+					row.put(prop, newValue);
+				}
+			}
+		}
 	}
 
 
@@ -41,21 +45,33 @@ public class GenieDataSetReplacer {
 	 * @param data Datos
 	 * @return
 	 */
-	private float getAverage(final int felder, String prop, List<GenieData> data) {
+	private float getAverage(int felder, String prop, List<GenieData> data) {
 		// Obtiene el rango en el cual cae el valor de felder del registro
-		final int lowerFelder = Arrays.stream(IGenieConstants.FELDER_INTERVALS).filter(val -> felder >= val).max().getAsInt();
-		final int upperFelder = Arrays.stream(IGenieConstants.FELDER_INTERVALS).filter(val -> felder < val).findFirst().getAsInt();
+		int lowerFelder = 0;
+		int upperFelder = 0;
+		for (int i = 1; i < IGenieConstants.FELDER_INTERVALS.length; i++) {
+			if (felder < IGenieConstants.FELDER_INTERVALS[i]) {
+				lowerFelder = IGenieConstants.FELDER_INTERVALS[i - 1];
+				upperFelder = IGenieConstants.FELDER_INTERVALS[i];
+				break;
+			}
+		}
 		
 		// Calcula el promedio de la propiedad teniendo en cuenta su valor de Felder
-		DoubleSummaryStatistics dss = data.stream()
-				.filter(row -> lowerFelder <= row.getFelder())
-				.filter(row -> row.getFelder() < upperFelder)
-				.map(row -> row.get(prop))
-				.filter(value -> value.intValue() != IGenieConstants.DATASET_MISSING_VALUE)
-				.collect(Collectors.summarizingDouble(Float::doubleValue));
-
-		long quantity = dss.getCount();
-		float sum = (float)dss.getSum();
+		float sum = 0;
+		int quantity = 0;
+		for (GenieData row : data) {
+			int rowFelder = row.getFelder();
+			
+			if (lowerFelder <= rowFelder && rowFelder < upperFelder) {
+				float rowValue = row.get(prop);
+				
+				if (rowValue != IGenieConstants.DATASET_MISSING_VALUE) {
+					sum += rowValue;
+					quantity++;
+				}
+			}
+		}
 		
 		if (quantity > 2) {
 			return sum/quantity;
