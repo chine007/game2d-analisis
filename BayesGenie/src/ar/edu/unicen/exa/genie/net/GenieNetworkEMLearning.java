@@ -37,8 +37,8 @@ public class GenieNetworkEMLearning {
 	 */
 	public void learn(Network net, DataSet dataSet) {
 		EM em = new EM();
-//		em.setRandomizeParameters(true);
-//		em.setRelevance(false);
+		em.setRandomizeParameters(true);
+		em.setRelevance(false);
 		
 		DataMatch[] match = dataSet.matchNetwork(net);
 		em.learn(dataSet, net, match);

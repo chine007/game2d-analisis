@@ -37,8 +37,8 @@ public class GenieNetworkCrossValidation {
 		for (int i = 0; i < recordNumber; i++) {
 			// Obtiene datos de usuario
 			String username = AbstractGenieUtils.getData(i).getUsername();
-			username = username.replace('ñ', 'n');
 			
+			// Crea directorio para usuario
 			GenieUtilsFile.createDir(IGenieConstants.FILE_OUTPUT_DIR + "/" + username);
 			logger.info(String.format("Username: %s", username));
 			
@@ -64,7 +64,7 @@ public class GenieNetworkCrossValidation {
 	}
 	
 	/**
-	 * Realiza el cross validation usando leave-one-out
+	 * Realiza el cross validation
 	 * 
 	 * @param networkFile Archivo de la red de Bayes
 	 * @param dataSet
@@ -124,12 +124,12 @@ public class GenieNetworkCrossValidation {
 		// Imprime la matriz de confusion
 		int[][] cm = validator.getConfusionMatrix(IGenieConstants.N0_ROOT);
 		for (int[] is : cm) {
-			System.out.println(Arrays.toString(is));
+			logger.info(Arrays.toString(is));
 		}
 		
 		// Imprime la precision por tipo de perception
 		for (String felderValue : IGenieConstants.FELDER_VALUES) {
-			System.out.println("Precision " + felderValue + ": " + validator.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
+			logger.info("Precision " + felderValue + ": " + validator.getAccuracy(IGenieConstants.N0_ROOT, felderValue));
 		}
 		
 		// Imprime el accuracy
@@ -137,7 +137,7 @@ public class GenieNetworkCrossValidation {
 		for (int i = 0; i < cm.length; i++) {
 			sum += cm[i][i];
 		}
-		System.out.println("Accuracy " + sum/(float)dataSet.getRecordCount());
+		logger.info("Accuracy " + sum/(float)dataSet.getRecordCount());
 	}
 	
 }

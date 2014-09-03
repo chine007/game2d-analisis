@@ -28,7 +28,7 @@ public class UtilsArffWriter {
 			FileWriter file = new FileWriter(IGenieConstants.FILE_ARFF);
 			
 			// Escribe el header
-			file.write("@relation genie\n\n");
+			file.write("@relation Genie\n\n");
 			
 			// Escribe los atributos
 			for (int i = 1; i < dataSet.getVariableCount(); i++) {

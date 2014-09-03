@@ -19,6 +19,7 @@ public class GenieNetworkBuilder {
 	 */
 	public Network buildNetwork() {
 		Network net = new Network();
+		net.setName("Genie");
 		
 		// LEVEL 0
 		addNode(net, null, N0_ROOT, FELDER_VALUES);
