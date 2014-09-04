@@ -37,6 +37,7 @@ public class MainGameFeatures {
 	}
 	
 //	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void generateArff(String arffPath) {
 		logger.info("================== Starting Java code ==================");
 		SessionManager.beginTransaction();

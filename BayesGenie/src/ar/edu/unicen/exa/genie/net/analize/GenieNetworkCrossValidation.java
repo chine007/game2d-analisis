@@ -44,15 +44,15 @@ public class GenieNetworkCrossValidation {
 			
 			// Obtiene datos de prueba
 			DataSet test = AbstractGenieUtils.getTestSet(dataSet, i);
-			test.writeFile(String.format(IGenieConstants.FILE_DATASET_MASK, username, "test", i, "dat"));
+			test.writeFile(String.format(IGenieConstants.FILE_DAT_MASK, username, "test", i, "dat"));
 
 			// Obtiene datos de entrenamiento
 			DataSet train = AbstractGenieUtils.getTrainingSet(dataSet, i);
-			train.writeFile(String.format(IGenieConstants.FILE_DATASET_MASK, username, "train", i, "dat"));
+			train.writeFile(String.format(IGenieConstants.FILE_DAT_MASK, username, "train", i, "dat"));
 			
 			// Aplica EM Learning
 			Network net = new GenieNetworkEMLearning().learn(networkFile, train);
-			net.writeFile(String.format(IGenieConstants.FILE_DATASET_MASK, username, "net", i, "xdsl"));
+			net.writeFile(String.format(IGenieConstants.FILE_DAT_MASK, username, "net", i, "xdsl"));
 			
 			// Realiza inferencia
 			if (new GenieNetworkInference().inference(net, test)) {

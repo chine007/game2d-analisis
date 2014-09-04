@@ -36,11 +36,11 @@ public class Game2DAnalisis54 {
 		
 		// Construye el data set
 		DataSet dataSet = genie.buildDataSet(data);
-		dataSet.writeFile(IGenieConstants.FILE_DATASET);
+		dataSet.writeFile(IGenieConstants.FILE_DAT_REPLACED);
 		
 		// Discretiza los datos
 		dataSet = genie.discretize(dataSet);
-		dataSet.writeFile(IGenieConstants.FILE_DATASET_DISCRETIZED);
+		dataSet.writeFile(IGenieConstants.FILE_DAT_REPLACED_DISCRETIZED);
 		
 		// Construye la red 
 		String networkFile = "output54/tlt.xdsl";

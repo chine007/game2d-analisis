@@ -1,6 +1,6 @@
 package ar.edu.unicen.exa.games.utils.writers;
 
-import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -28,31 +28,31 @@ public class WriterTxt {
 	 */
 	public void write(DataSet dataSet, String fileName) {
 		try {
-			FileWriter file = new FileWriter(fileName);
+			PrintWriter pw = new PrintWriter(fileName);
 			
 			// Escribe el nombre de las variables
 			for (int i = 0; i < dataSet.getVariableCount(); i++) {
 				String variable = dataSet.getVariableId(i); 
-				file.write(String.format("%s ", variable));
+				pw.printf("%s ", variable);
 			}
-			file.write(String.format("%n"));
+			pw.println();
 
 			// Escribe los valores de las variables
 			for (int record = 0; record < dataSet.getRecordCount(); record++) {
 				for (int var = 0; var < dataSet.getVariableCount(); var++) {
 					int value = dataSet.getInt(var, record);
 					if (value == IGenieConstants.DATASET_MISSING_VALUE) {
-						file.write(String.format("%8s", "*"));
+						pw.printf("%8s", "*");
 					} else {
-						file.write(String.format("%8d", value));
+						pw.printf("%8d", value);
 					}
 				}
-				file.write(String.format("%n"));
+				pw.println();
 			}
 			
-			file.close();
+			pw.close();
 		} catch (Exception e) {
-			logger.error("Error escribiendo el ARFF", e);	
+			logger.error("Error escribiendo el TXT", e);	
 		}
 	}
 	

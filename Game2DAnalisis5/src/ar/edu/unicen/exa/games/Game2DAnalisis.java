@@ -43,12 +43,12 @@ public class Game2DAnalisis {
 		
 		// Construye el data set
 		DataSet dataSet = genie.buildDataSet(data);
-		dataSet.writeFile(IGenieConstants.FILE_DATASET);
+		dataSet.writeFile(IGenieConstants.FILE_DAT_REPLACED);
 		new WriterTxt().write(dataSet, IGenieConstants.FILE_TXT_REPLACED);
 		
 		// Discretiza los datos
 		dataSet = genie.discretize(dataSet);
-		dataSet.writeFile(IGenieConstants.FILE_DATASET_DISCRETIZED);
+		dataSet.writeFile(IGenieConstants.FILE_DAT_REPLACED_DISCRETIZED);
 		
 		// Construye la red 
 		Network net = genie.builNetwork();
@@ -58,7 +58,7 @@ public class Game2DAnalisis {
 		genie.crossValidate(IGenieConstants.FILE_BAYES_NET, dataSet);
 		
 		// Genera el ARFF
-		new WriterArff().write(dataSet);
+		new WriterArff().write(dataSet, IGenieConstants.FILE_ARFF);
 	}
 	
 }
