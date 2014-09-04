@@ -1,4 +1,4 @@
-package ar.edu.unicen.exa.games.utils;
+package ar.edu.unicen.exa.games.utils.writers;
 
 import java.io.FileWriter;
 import java.util.Arrays;
@@ -14,8 +14,8 @@ import ar.edu.unicen.exa.genie.utils.IGenieConstants;
  * @author juan
  *
  */
-public class UtilsArffWriter {
-	private static final Logger logger = Logger.getLogger(UtilsArffWriter.class);
+public class WriterArff {
+	private static final Logger logger = Logger.getLogger(WriterArff.class);
 
 	
 	/**

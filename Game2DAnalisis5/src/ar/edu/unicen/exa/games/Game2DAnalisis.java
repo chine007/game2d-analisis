@@ -5,7 +5,8 @@ import java.util.List;
 import smile.Network;
 import smile.learning.DataSet;
 import ar.edu.unicen.exa.games.loader.DataLoader;
-import ar.edu.unicen.exa.games.utils.UtilsArffWriter;
+import ar.edu.unicen.exa.games.utils.writers.WriterArff;
+import ar.edu.unicen.exa.games.utils.writers.WriterTxt;
 import ar.edu.unicen.exa.genie.GenieFacade;
 import ar.edu.unicen.exa.genie.data.GenieData;
 import ar.edu.unicen.exa.genie.utils.IGenieConstants;
@@ -34,12 +35,16 @@ public class Game2DAnalisis {
 		// Carga los datos
 		List<GenieData> data = new DataLoader().loadData();
 		
+		// Escribe el data set original
+		new WriterTxt().write(data, IGenieConstants.FILE_TXT_ORIG);
+		
 		// Reemplaza los missing values
 		genie.replaceMissingValues(data);
 		
 		// Construye el data set
 		DataSet dataSet = genie.buildDataSet(data);
 		dataSet.writeFile(IGenieConstants.FILE_DATASET);
+		new WriterTxt().write(dataSet, IGenieConstants.FILE_TXT_REPLACED);
 		
 		// Discretiza los datos
 		dataSet = genie.discretize(dataSet);
@@ -53,7 +58,7 @@ public class Game2DAnalisis {
 		genie.crossValidate(IGenieConstants.FILE_BAYES_NET, dataSet);
 		
 		// Genera el ARFF
-		new UtilsArffWriter().write(dataSet);
+		new WriterArff().write(dataSet);
 	}
 	
 }

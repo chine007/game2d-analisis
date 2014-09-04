@@ -74,6 +74,8 @@ public interface IGenieConstants {
 	String FILE_BAYES_NET 								= FILE_OUTPUT_DIR + "/net.xdsl";
 	String FILE_CROSS_VALIDATE 							= FILE_OUTPUT_DIR + "/crossValidate.txt";
 	String FILE_ARFF 									= FILE_OUTPUT_DIR + "/data.arff";
+	String FILE_TXT_ORIG 								= FILE_OUTPUT_DIR + "/txtDataOrig.txt";
+	String FILE_TXT_REPLACED							= FILE_OUTPUT_DIR + "/txtDataReplaced.txt";
 
 	/** Missing value */
 	Integer DATASET_MISSING_VALUE 						= Integer.MAX_VALUE;
