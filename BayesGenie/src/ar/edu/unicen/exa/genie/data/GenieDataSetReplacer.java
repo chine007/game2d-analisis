@@ -59,7 +59,8 @@ public class GenieDataSetReplacer {
 		
 		// Calcula el promedio de la propiedad teniendo en cuenta su valor de Felder
 		float sum = 0;
-		int quantity = 0;
+		int recordsWithValue = 0;
+		int totalRecords = 0;
 		for (GenieData row : data) {
 			int rowFelder = row.getFelder();
 			
@@ -68,13 +69,16 @@ public class GenieDataSetReplacer {
 				
 				if (rowValue != IGenieConstants.DATASET_MISSING_VALUE) {
 					sum += rowValue;
-					quantity++;
+					recordsWithValue++;
 				}
+				totalRecords++;
 			}
 		}
 		
-		if (quantity > 2) {
-			return sum/quantity;
+		// Retorna el valor
+		if (recordsWithValue/(float)totalRecords >= 0.5) {
+//		if (recordsWithValue > 2) {
+			return sum/recordsWithValue;
 		} else {
 			return IGenieConstants.DATASET_MISSING_VALUE;
 		}

@@ -4,7 +4,10 @@
 
 2. muchos datos en el dataset con missing values
 	a. completar con promedio, el mas repetido, etc 					NO funciono
-	b. completar con promedio por categoria								FUNCIONO
+	b. completar con promedio por categoria								FUNCIONO, pero...
+		i. Si reemplazo sin tener en cuenta la cantidad de registros que tienen valor se introduce una "pseudo-clase"
+		ii. Usando esta tecnica la red retorna un accuracy muy bueno con las otras dimensiones de Felder, incluso el accuracy es mejor que el que se obtiene para 
+		la percepcion!!!   
 
 3. inicializacion de las CPT
 	a. setear datos acordes a lo que escribi en el draft de la tesis 	NO funciono - 0.33 accuracy
