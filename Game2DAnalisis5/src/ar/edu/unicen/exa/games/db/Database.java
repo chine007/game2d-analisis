@@ -70,16 +70,20 @@ public class Database {
 	/**
 	 * Retorna los nombres de todos los usuarios que jugaron
 	 * 
+	 * @param felderDimension Dimension de Felder 
 	 * @return Nombres de todos los usuarios que jugaron
 	 * @throws Exception
 	 */
-	public List<String> getAllUsersPlayed() throws Exception {
+	public List<String> getAllUsersPlayed(String felderDimension) throws Exception {
 		Connection conn = ds.getConnection();
 
 		try {
 			// Read query file
 			InputStream sqlFile = getFileName("allUsersPlayed.sql");
 			String query = GenieUtilsFile.readFile(sqlFile);
+					
+			// Replace parameters
+			query = query.replaceAll(":felderDimension", felderDimension);
 
 			// Create statement
 			Statement st = conn.createStatement();

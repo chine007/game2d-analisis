@@ -41,11 +41,11 @@ public class DataLoader {
 		List<GenieData> result = new ArrayList<GenieData>();
 		
 		try {
-			// Obtiene los nombres de todos los jugadores que jugaron
-			List<String> users = db.getAllUsersPlayed();
-			
 			// Obtiene la dimension de Felder a analizar
 			String felderDimension = UtilsConfig.get().getValue("felder.dimension");
+			
+			// Obtiene los nombres de todos los jugadores que jugaron
+			List<String> users = db.getAllUsersPlayed(felderDimension);
 			
 			for (String username : users) {
 				// Obtiene el valor de Felder del usuario
