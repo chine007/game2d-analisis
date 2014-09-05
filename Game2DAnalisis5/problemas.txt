@@ -2,12 +2,18 @@
 	a. usar uno balanceado 												NO funciono - 20 int, 20 neu, 20 sen
 	b. triplicar intuitivos 											NO funciono - 60 int, 64 neu, 62 sen - 0.5 accuracy
 
+
 2. muchos datos en el dataset con missing values
 	a. completar con promedio, el mas repetido, etc 					NO funciono
+
 	b. completar con promedio por categoria								FUNCIONO, pero...
 		i. Si reemplazo sin tener en cuenta la cantidad de registros que tienen valor se introduce una "pseudo-clase"
 		ii. Usando esta tecnica la red retorna un accuracy muy bueno con las otras dimensiones de Felder, incluso el accuracy es mejor que el que se obtiene para 
 		la percepcion!!!   
+
+	c. completar con random usando una distribucion normal:
+		i. Se pueden generar valores negativos				
+
 
 3. inicializacion de las CPT
 	a. setear datos acordes a lo que escribi en el draft de la tesis 	NO funciono - 0.33 accuracy

@@ -4,5 +4,6 @@
 	<classpathentry kind="lib" path="lib/smile.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-math3-3.3.jar" sourcepath="C:/Users/juan/.m2/repository/org/apache/commons/commons-math3/3.3/commons-math3-3.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

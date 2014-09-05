@@ -93,4 +93,13 @@ public abstract class AbstractGenieUtils {
 	public static void setData(List<GenieData> data) {
 		AbstractGenieUtils.data = new ArrayList<GenieData>(data);
 	}
+	
+	/**
+	 * Retorna true si el valor es un missing value
+	 * 
+	 * @param n Valor a analizar
+	 */
+	public static boolean isMissingValue(Number n) {
+		return n.intValue() == IGenieConstants.DATASET_MISSING_VALUE;
+	}
 }
