@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<smile version="1.0" id="Unnamed" numsamples="1000" discsamples="10000">
+	<nodes>
+		<cpt id="n0_perception">
+			<state id="intuitive" />
+			<state id="neutral" />
+			<state id="sensitive" />
+			<probabilities>0.2941176470588235 0.3676470588235294 0.3382352941176471</probabilities>
+		</cpt>
+		<cpt id="n1_innovation">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.2439430876581464 0.3720012892153303 0.3840556231265232 0.48469195176349 0.4745114763288124 0.04079657190769785 0.000198097472450151 0.04369641613302847 0.9561054863945213</probabilities>
+		</cpt>
+		<cpt id="n1_complexity">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.633304471268286 0.1205149265872067 0.2461806021445071 0.3564557359715264 0.6321625083309403 0.01138175569753326 0.1057011480553092 0.1209240618436921 0.7733747901009986</probabilities>
+		</cpt>
+		<cpt id="n1_memorization">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.7418142640933194 0.1082024787452867 0.1499832571613939 0.3184623356079156 0.6814231334640346 0.0001145309280499466 7.297629479515769e-005 5.513889628939957e-010 0.9999270231538159</probabilities>
+		</cpt>
+		<cpt id="n1_detail">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.8799169332176394 0.01079888825900333 0.1092841785233572 5.832143354400582e-006 0.9999548428206394 3.932503600626087e-005 0.09531860458637795 2.630108737230414e-012 0.904681395410992</probabilities>
+		</cpt>
+		<cpt id="n1_repetition">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.2261631545441649 0.154553490234821 0.6192833552210143 0.02068273413817433 0.4627711417487107 0.5165461241131151 0.8417886665081062 0.1564624374205902 0.001748896071303654</probabilities>
+		</cpt>
+		<cpt id="n1_practice">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.2327346437527872 0.2619914662448279 0.5052738900023849 0.4899762601621667 0.45786758871322 0.05215615112461332 0.02536801223292227 0.002593279951434173 0.9720387078156435</probabilities>
+		</cpt>
+		<cpt id="n1_standard_methods">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.2805547952153252 0.4478245597378896 0.271620645046785 0.1136809452304433 0.82110055249346 0.06521850227609662 0.208358470035484 0.0001602539400770566 0.791481276024439</probabilities>
+		</cpt>
+		<cpt id="n1_theory">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.2773527180520338 0.2575868824299685 0.4650603995179976 0.6010866266888417 0.122334529761228 0.2765788435499302 0.1078189368805556 0.8236479283135816 0.06853313480586268</probabilities>
+		</cpt>
+		<cpt id="n1_new_concepts">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.3013684011036863 0.2341060738508723 0.4645255250454413 0.8029245728133955 0.1798082713315705 0.01726715585503406 0.0627520285519011 0.1572034389796871 0.7800445324684118</probabilities>
+		</cpt>
+		<cpt id="n1_symbols">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.1527038878447253 0.2002117261057745 0.6470843860495001 0.6969694214491969 0.2804111669996828 0.02261941155112021 0.09792243105812633 0.73766177901854 0.1644157899233336</probabilities>
+		</cpt>
+		<cpt id="n1_velocity">
+			<state id="l1_low" />
+			<state id="l1_medium" />
+			<state id="l1_high" />
+			<parents>n0_perception</parents>
+			<probabilities>0.1410629470586759 0.3216301069864153 0.5373069459549087 0.2698782179243748 0.519932077287977 0.2101897047876482 0.95654315510016 0.04342952601236898 2.731888747095432e-005</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_levels_won">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_innovation</parents>
+			<probabilities>0.1056939556617725 0.6697716954068677 0.2245343489313597 0.001452150388441471 0.005101555842169411 0.993446293769389 0.4942514818836096 0.505706965003548 4.155311284247035e-005</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_max_level">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_innovation</parents>
+			<probabilities>0.04769879979384904 0.9433122036246311 0.008988996581519915 0.0001096198478266389 0.06480075723430184 0.9350896229178716 0.07113360954360774 0.770160997965977 0.1587053924904152</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_movs">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_innovation</parents>
+			<probabilities>0.2580153528272363 0.2072323876608345 0.5347522595119292 0.000919220037079763 0.3142124479150778 0.6848683320478425 0.5732078937687776 0.426745134795228 4.697143599440255e-005</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_help">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_complexity</parents>
+			<probabilities>0.008704273602564962 0.6555110397380745 0.3357846866593606 0.3690447089286292 0.2430115563247239 0.387943734746647 0.1430541645029619 0.3762262204206931 0.4807196150763451</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_timeout">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_complexity n1_velocity</parents>
+			<probabilities>0.002396274943612066 0.6465598336694374 0.3510438913869506 8.994153842790788e-005 0.0176744319915402 0.9822356264700318 0.004381833352714313 0.98637484605139 0.009243320595895698 0.001769334974080645 0.9590762919828466 0.03915437304307288 0.001398317824858585 0.631983877651496 0.3666178045236455 0.003065698812317212 0.9938787787273955 0.003055522460287234 0.001115370821805049 0.988012824513805 0.01087180466439008 0.001703832397473555 0.9682324085509202 0.03006375905160625 0.002280689303984136 0.9942605138205115 0.003458796875504296</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_levels_lost">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_complexity</parents>
+			<probabilities>0.3611615556910587 0.5443951761146629 0.09444326819427837 0.005593086938589888 0.1060713077473177 0.8883356053140925 0.1828370545168168 0.6820124912460621 0.1351504542371209</probabilities>
+		</cpt>
+		<cpt id="n2_memory_levels_won">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_memorization</parents>
+			<probabilities>0.05510343546973465 0.004886350922698083 0.9400102136075673 0.05193093262396918 0.8142377224461448 0.1338313449298861 0.7209714445993077 0.278981352663065 4.720273762727621e-005</probabilities>
+		</cpt>
+		<cpt id="n2_memory_max_level">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_memorization</parents>
+			<probabilities>0.04564213116454937 0.1197536574921571 0.8346042113432937 0.0002822975232993229 0.3241380276436098 0.6755796748330909 0.767447197992704 0.2324970523953152 5.574961198070373e-005</probabilities>
+		</cpt>
+		<cpt id="n2_memory_mean_time_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_detail n1_velocity</parents>
+			<probabilities>0.1861896316400766 0.8134389673038071 0.0003714010561162933 0.7863528392176851 0.1707159285965853 0.04293123218572969 0.0009662450116395276 0.02478156541480396 0.9742521895735565 2.5978137851986e-009 0.556555544154135 0.4434444532480512 1.881607601781459e-009 0.306185212307744 0.6938147858106484 0.1888753715211083 0.8098396939581249 0.001284934520766906 0.679020557431543 0.3209746248116199 4.817756837027183e-006 0.7948444917056133 0.01487269017272437 0.1902828181216623 0.01085179871876508 0.01638659906906381 0.9727616022121711</probabilities>
+		</cpt>
+		<cpt id="n2_memory_levels_lost">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_detail</parents>
+			<probabilities>0.2108273365201192 0.3581661280512102 0.4310065354286707 0.1587309678861823 0.2804326038381831 0.5608364282756345 0.291965368901609 0.6713183775878993 0.03671625351049161</probabilities>
+		</cpt>
+		<cpt id="n2_memory_time_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_repetition</parents>
+			<probabilities>0.7179183016411476 0.2774350419654838 0.004646656393368613 0.08650849765192735 0.9112023550504338 0.002289147297638928 0.09548488476358409 0.0007145652567036689 0.9038005499797123</probabilities>
+		</cpt>
+		<cpt id="n2_memory_turns_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_repetition</parents>
+			<probabilities>0.6642458416009152 0.33575414416165 1.423743486801155e-008 0.124917133675481 0.873423598035197 0.001659268289322093 0.001840075025506532 0.09145103963771394 0.9067088853367795</probabilities>
+		</cpt>
+		<cpt id="n2_concrete_turns_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_repetition n1_practice</parents>
+			<probabilities>0.0617106638924791 0.01533180370035719 0.9229575324071636 0.001650414412963188 0.5461744688656506 0.4521751167213863 0.5424489358146584 0.3855437842603049 0.07200727992503668 0.1431033545705721 0.5192714193361363 0.3376252260932917 0.2216741637915288 0.08279959957022057 0.6955262366382506 0.8987883248218234 0.07228932870563071 0.02892234647254576 0.0887975933669011 0.3692692394527347 0.5419331671803644 0.09349966627831471 0.0737712589036804 0.8327290748180048 0.2164741941252517 0.7102381999755785 0.07328760589916987</probabilities>
+		</cpt>
+		<cpt id="n2_concrete_time_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_repetition</parents>
+			<probabilities>0.424282998488686 0.4992181972304033 0.07649880428091072 0.4061238607763434 0.3117585253025206 0.2821176139211359 0.159081777654589 0.1984237142487834 0.6424945080966277</probabilities>
+		</cpt>
+		<cpt id="n2_concrete_levels_won">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_standard_methods</parents>
+			<probabilities>0.4021354106967878 0.5971250414574907 0.0007395478457214544 0.0427737858143103 0.1774649336260494 0.7797612805596402 0.6092546119203263 0.3906183822848596 0.0001270057948142165</probabilities>
+		</cpt>
+		<cpt id="n2_abstract_turns_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_theory</parents>
+			<probabilities>0.1207240475258007 0.3269415690548417 0.5523343834193577 0.5411441105484437 0.4064831912870647 0.05237269816449153 0.2553167603050887 0.2490011096462347 0.4956821300486767</probabilities>
+		</cpt>
+		<cpt id="n2_abstract_mean_time_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_new_concepts n1_velocity</parents>
+			<probabilities>0.4168617133901917 0.5830943017937031 4.398481610512484e-005 0.3030863142900777 0.3910254912278698 0.3058881944820525 0.404599875502242 0.3017600348975724 0.2936400896001857 0.6829625717725151 0.270537232367541 0.04650019585994383 0.4443005434661145 0.3008896540560593 0.2548098024778263 0.1498050608623453 0.1841178661486673 0.6660770729889876 0.2304576374112073 0.2473939564498393 0.5221484061389534 0.1191688011233101 0.009410465280630951 0.871420733596059 0.2436675819275467 0.7100995646914846 0.04623285338096864</probabilities>
+		</cpt>
+		<cpt id="n2_abstract_max_level">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_symbols</parents>
+			<probabilities>0.1275015945752384 0.1327750192058341 0.7397233862189273 0.5912528080707158 0.2112354771222755 0.1975117148070088 0.0250594213882329 0.6391528203912902 0.3357877582204769</probabilities>
+		</cpt>
+		<cpt id="n2_abstract_levels_won">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_symbols</parents>
+			<probabilities>0.05066920946106487 0.1398265172709862 0.8095042732679488 0.703068543006149 0.2111131025940821 0.08581835439976898 6.453066515679469e-013 0.861579376815209 0.1384206231841456</probabilities>
+		</cpt>
+		<cpt id="n2_puzzle_mean_time_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_velocity</parents>
+			<probabilities>0.5994917427796142 0.4004579053999329 5.035182045296184e-005 2.047143176566414e-005 1.112152949527997e-005 0.999968407038739 0.1917787970692884 0.6482389720223954 0.1599822309083162</probabilities>
+		</cpt>
+		<cpt id="n2_concrete_mean_time_played">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_velocity</parents>
+			<probabilities>0.3591064855843366 0.2291777916405007 0.4117157227751628 0.3614357773295222 0.1491091686949639 0.4894550539755139 0.2054452595826207 0.7945150614365762 3.967898080323912e-005</probabilities>
+		</cpt>
+		<cpt id="n2_memory_timeout">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_velocity</parents>
+			<probabilities>0.3091207293771111 0.3545511441741929 0.3363281264486959 0.4342512325659012 0.3748161408405032 0.1909326265935958 0.367785558258021 0.3398896195802028 0.2923248221617762</probabilities>
+		</cpt>
+		<cpt id="n2_concrete_timeout">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_velocity</parents>
+			<probabilities>0.0004455499844458411 0.0003023432372201794 0.999252106778334 0.3846608043302573 1.37975981618796e-011 0.6153391956559452 2.976018077774345e-005 1.109503859043776e-006 0.9999691303153633</probabilities>
+		</cpt>
+		<cpt id="n2_abstract_timeout">
+			<state id="l2_low" />
+			<state id="l2_medium" />
+			<state id="l2_high" />
+			<parents>n1_velocity</parents>
+			<probabilities>0.005136202112767124 0.03059208600515543 0.9642717118820774 0.003219575823625783 0.002714838303408567 0.9940655858729658 6.165130611061641e-005 9.347931714386699e-005 0.9998448693767457</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.0.5219.0" name="Genie" faultnameformat="nodestate">
+			<node id="n0_perception">
+				<name>n0_perception</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>36 28 112 64</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_innovation">
+				<name>n1_innovation</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>36 174 112 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_complexity">
+				<name>n1_complexity</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>294 174 370 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_memorization">
+				<name>n1_memorization</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>552 174 628 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_detail">
+				<name>n1_detail</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>810 174 886 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_repetition">
+				<name>n1_repetition</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1068 174 1144 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_practice">
+				<name>n1_practice</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1326 174 1402 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_standard_methods">
+				<name>n1_standard_methods</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1584 174 1660 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_theory">
+				<name>n1_theory</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1842 174 1918 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_new_concepts">
+				<name>n1_new_concepts</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2100 174 2176 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_symbols">
+				<name>n1_symbols</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2358 174 2434 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n1_velocity">
+				<name>n1_velocity</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2616 174 2692 210</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_levels_won">
+				<name>n2_puzzle_levels_won</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>36 320 112 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_max_level">
+				<name>n2_puzzle_max_level</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>294 320 370 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_movs">
+				<name>n2_puzzle_movs</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>552 320 628 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_help">
+				<name>n2_puzzle_help</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>810 320 886 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_timeout">
+				<name>n2_puzzle_timeout</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1068 320 1144 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_levels_lost">
+				<name>n2_puzzle_levels_lost</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1326 320 1402 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_levels_won">
+				<name>n2_memory_levels_won</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1584 320 1660 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_max_level">
+				<name>n2_memory_max_level</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1842 320 1918 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_mean_time_played">
+				<name>n2_memory_mean_time_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2100 320 2176 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_levels_lost">
+				<name>n2_memory_levels_lost</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2358 320 2434 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_time_played">
+				<name>n2_memory_time_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2616 320 2692 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_turns_played">
+				<name>n2_memory_turns_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2874 320 2950 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_concrete_turns_played">
+				<name>n2_concrete_turns_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>3132 320 3208 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_concrete_time_played">
+				<name>n2_concrete_time_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>3390 320 3466 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_concrete_levels_won">
+				<name>n2_concrete_levels_won</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>3648 320 3724 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_abstract_turns_played">
+				<name>n2_abstract_turns_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>3906 320 3982 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_abstract_mean_time_played">
+				<name>n2_abstract_mean_time_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>4164 320 4240 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_abstract_max_level">
+				<name>n2_abstract_max_level</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>4422 320 4498 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_abstract_levels_won">
+				<name>n2_abstract_levels_won</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>4680 320 4756 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_puzzle_mean_time_played">
+				<name>n2_puzzle_mean_time_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>4938 320 5014 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_concrete_mean_time_played">
+				<name>n2_concrete_mean_time_played</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>5196 320 5272 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_memory_timeout">
+				<name>n2_memory_timeout</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>5454 320 5530 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_concrete_timeout">
+				<name>n2_concrete_timeout</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>5712 320 5788 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="n2_abstract_timeout">
+				<name>n2_abstract_timeout</name>
+				<interior color="e5f6f7" />
+				<outline color="0000bb" />
+				<font color="000000" name="Arial" size="8" />
+				<position>5970 320 6046 356</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+		</genie>
+	</extensions>
+</smile>
