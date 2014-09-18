@@ -68,8 +68,17 @@ public class TestNormalDistributionWithKolmogorovSmirnov {
 				NormalDistribution nd = new NormalDistribution(ss.getMean(), ss.getStandardDeviation());
 				double alpha = 0.01;
 				System.out.printf("Variable %-30s - Valor %-5b - p-value %f%n", prop, kst.kolmogorovSmirnovTest(nd, array, alpha), kst.kolmogorovSmirnovTest(nd, array));
+
+//				KolmogorovSmirnov1Sample instance = new KolmogorovSmirnov1Sample(
+//						array, new com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution(ss.getMean(), ss.getStandardDeviation()),
+//						KolmogorovSmirnov.Side.LESS);
+//
+//				System.out.printf("p-value = %f; test stats = %f%n",
+//						instance.pValue(), instance.statistics());
 			}
 		}
 	}
+	
+	
 
 }

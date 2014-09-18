@@ -11,6 +11,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/BayesGenie"/>
 	<classpathentry kind="lib" path="/BayesGenie/lib/smile.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/BayesGenie/lib/commons-math3-3.3.jar" sourcepath="C:/Users/juan/.m2/repository/org/apache/commons/commons-math3/3.3/commons-math3-3.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
