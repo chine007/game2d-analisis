@@ -1,4 +1,4 @@
-package ar.edu.unicen.exa.genie.tests;
+package ar.edu.unicen.exa.tests;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +12,9 @@ import org.apache.commons.math3.stat.inference.KolmogorovSmirnovTest;
 import ar.edu.unicen.exa.games.loader.DataLoader;
 import ar.edu.unicen.exa.genie.data.GenieData;
 import ar.edu.unicen.exa.genie.utils.IGenieConstants;
+
+import com.numericalmethod.suanshu.stats.test.distribution.kolmogorov.KolmogorovSmirnov;
+import com.numericalmethod.suanshu.stats.test.distribution.kolmogorov.KolmogorovSmirnov1Sample;
 
 /**
  * Analiza si las variables del dataset siguen una distribucion normal 
@@ -58,27 +61,24 @@ public class TestNormalDistributionWithKolmogorovSmirnov {
 			SummaryStatistics ss = new SummaryStatistics();
 			values.stream().forEach(ss::addValue);
 			
-			double[] array = new double[values.size()];
-			Arrays.setAll(array, idx -> values.get(idx));
+			double[] sample = new double[values.size()];
+			Arrays.setAll(sample, idx -> values.get(idx));
 			
 			// Realiza el test
-			if (array.length > 0) {
+			double alpha = 0.01;
+			if (sample.length > 0) {
 				// si p-value < alpha --> rechaza H0
 				KolmogorovSmirnovTest kst = new KolmogorovSmirnovTest();
 				NormalDistribution nd = new NormalDistribution(ss.getMean(), ss.getStandardDeviation());
-				double alpha = 0.01;
-				System.out.printf("Variable %-30s - Valor %-5b - p-value %f%n", prop, kst.kolmogorovSmirnovTest(nd, array, alpha), kst.kolmogorovSmirnovTest(nd, array));
+				System.out.printf("Variable %-30s - p-value = %f - rechaza H0 = %b%n", prop, kst.kolmogorovSmirnovTest(nd, sample), kst.kolmogorovSmirnovTest(nd, sample, alpha));
 
-//				KolmogorovSmirnov1Sample instance = new KolmogorovSmirnov1Sample(
-//						array, new com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution(ss.getMean(), ss.getStandardDeviation()),
-//						KolmogorovSmirnov.Side.LESS);
-//
-//				System.out.printf("p-value = %f; test stats = %f%n",
-//						instance.pValue(), instance.statistics());
+				// usa la biblioteca suanshu
+				KolmogorovSmirnov1Sample kst2 = new KolmogorovSmirnov1Sample(
+						sample, new com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution(ss.getMean(), ss.getStandardDeviation()),
+						KolmogorovSmirnov.Side.LESS);
+				System.out.printf("Variable %-30s - p-value = %f - rechaza H0 = %b%n", prop, kst2.pValue(), kst2.isNullRejected(alpha));
 			}
 		}
 	}
-	
-	
 
 }

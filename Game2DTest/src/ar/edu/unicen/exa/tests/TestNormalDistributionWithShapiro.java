@@ -1,4 +1,4 @@
-package ar.edu.unicen.exa.genie.tests;
+package ar.edu.unicen.exa.tests;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,14 +41,14 @@ public class TestNormalDistributionWithShapiro {
 					.collect(Collectors.toList());
 			
 			// Copia los valores
-			double[] array = new double[values.size()];
-			Arrays.setAll(array, idx -> values.get(idx));
+			double[] sample = new double[values.size()];
+			Arrays.setAll(sample, idx -> values.get(idx));
 			
 			// Realiza el test
 			double alpha = 0.05;
-			if (array.length > 0) {
-				ShapiroWilk sw = new ShapiroWilk(array);
-				System.out.printf("Variable %-30s - p-value = %f - reject H0 = %s%n", prop, sw.pValue(), sw.isNullRejected(alpha));
+			if (sample.length > 0) {
+				ShapiroWilk sw = new ShapiroWilk(sample);
+				System.out.printf("Variable %-30s - p-value = %f - rechaza H0 = %b%n", prop, sw.pValue(), sw.isNullRejected(alpha));
 			}
 		}
 	}

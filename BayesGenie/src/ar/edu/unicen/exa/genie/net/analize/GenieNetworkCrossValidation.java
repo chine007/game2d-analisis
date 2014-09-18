@@ -86,11 +86,11 @@ public class GenieNetworkCrossValidation {
 		EM em = new EM();
 		em.setRandomizeParameters(true);
 		em.setUniformizeParameters(false);
-		em.setRelevance(true);
+		em.setRelevance(false);
 		
 		// Setea la validacion
-//		validator.leaveOneOut(em);
-		validator.kFold(em, 10);
+		validator.leaveOneOut(em);
+//		validator.kFold(em, 10);
 		
 		// Graba el resultado
 		validator.getResultDataSet().writeFile(IGenieConstants.FILE_CROSS_VALIDATE);
