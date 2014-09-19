@@ -21,7 +21,7 @@ import com.numericalmethod.suanshu.stats.test.distribution.normality.ShapiroWilk
  * @author juan
  *
  */
-public class TestNormalDistributionWithShapiro {
+public class TestNormalDistributionWithShapiroWilk {
 
 	public static void main(String[] args) {
 		// Obtiene los datos

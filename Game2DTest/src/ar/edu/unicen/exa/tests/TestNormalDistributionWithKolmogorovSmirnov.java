@@ -75,7 +75,7 @@ public class TestNormalDistributionWithKolmogorovSmirnov {
 				// usa la biblioteca suanshu
 				KolmogorovSmirnov1Sample kst2 = new KolmogorovSmirnov1Sample(
 						sample, new com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution(ss.getMean(), ss.getStandardDeviation()),
-						KolmogorovSmirnov.Side.LESS);
+						KolmogorovSmirnov.Side.TWO_SIDED);
 				System.out.printf("Variable %-30s - p-value = %f - rechaza H0 = %b%n", prop, kst2.pValue(), kst2.isNullRejected(alpha));
 			}
 		}
